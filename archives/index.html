@@ -1,284 +1,164 @@
 <html>
   <head>
-      <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>洗衣机&#39;s Blog</title>
-<link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico?v=1577348063682">
-<link rel="stylesheet" href="https://womeimingzi11.github.io/styles/main.css">
 <meta name="description" content="Why be a researcher if you can be an Engineer?" />
-
-<link rel="stylesheet" href="/media/fonts/iconfont.css">
-<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico?v=1577348415464">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://womeimingzi11.github.io/styles/main.css">
 
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
   </head>
   <body>
-    <div class="head-top-line"></div>
-    <div class="header-box">
-      <header class="header">
-  <div class="blog-header" id="header">
-    <div class="site-meta">
-      <div class="nav-toggle" id="nav_toggle">
-        <div class="toggle-box">
-          <div class="line line-top"></div>
-          <div class="line line-center"></div>
-          <div class="line line-bottom"></div>
-        </div>
-      </div>
-      <div class="site-title">
-        <a href="/" class="brand">
-          <span>洗衣机&#39;s Blog</span>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://womeimingzi11.github.io">
+  <img class="avatar" src="https://womeimingzi11.github.io/images/avatar.png?v=1577348415464" alt="">
+  </a>
+  <h1 class="site-title">
+    洗衣机&#39;s Blog
+  </h1>
+  <p class="site-description">
+    Why be a researcher if you can be an Engineer?
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
         </a>
-      </div>
-      <p class="subtitle">Quick notes</p>
-    </div>
-    <nav class="site-nav" id="site_nav">
-      <ul>
-        <li class="nav-item ">
-          
-            
-              
-                <a href="/">
-                  <i class="iconfont icon-home"></i> 首页
-                </a>
-              
-            
-          
-            
-          
-            
-          
-            
-          
-        </li>
-        <li class="nav-item nav-item-active">
-          
-            
-          
-            
-              
-                <a href="/archives">
-                  <i class="iconfont icon-archive"></i> 归档
-                </a>
-              
-            
-          
-            
-          
-            
-          
-        </li>
-        <li class="nav-item ">
-          
-            
-          
-            
-          
-            
-              
-                <a href="/tags">
-                  <i class="iconfont icon-tags"></i> 标签
-                </a>
-              
-            
-          
-            
-          
-        </li>
-        <li class="nav-item">
-          <a>
-            <i class="iconfont icon-search"></i> 搜索
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</header>
-<script type="text/javascript"> 
- 
-  let showNav = true;
-
-  let navToggle = document.querySelector('#nav_toggle'),
-  siteNav = document.querySelector('#site_nav');
-  
-  function navClick() {
-    navToggle.classList.toggle('nav-toggle-active');
-    siteNav.classList.toggle('nav-menu-active');
-  }
-
-  navToggle.addEventListener('click',navClick);  
-</script>
-    </div>
-    <div class="main-continer">
-      <div class="section-layout">
-        <div class="section-layout-wrapper">
-          <div class="sidebar">
-    <div class="sidebar-wrapper">
-  <div class="sidebar-item">
-    <img class="site-author-image" src="https://womeimingzi11.github.io/images/avatar.png"/>
-    <p class="site-author-name">洗衣机&#39;s Blog</p>
-    <p class="site-description">Why be a researcher if you can be an Engineer?</p>
-  </div>
-  <div class="sidebar-item side-item-stat">
-    <div class="sidebar-item-box">
-      <a href="/archives/">
-        <span class="site-item-stat-count">1</span>
-        <span class="site-item-stat-name">日志</span>
-      </a>
-    </div>
-    <div class="sidebar-item-box">
-      <a href="">
-        <span class="site-item-stat-count">1</span>
-        <span class="site-item-stat-name">分类</span>
-      </a>
-    </div>
-    <div class="sidebar-item-box">
-      <a href="/tags/">
-        <span class="site-item-stat-count">1</span>
-        <span class="site-item-stat-name">标签</span>
-      </a>
-    </div>
-  </div>
-  <div class="sidebar-item">
-    <span class="site-item-rss">
-        <i class="iconfont icon-rss"></i>
-        <a href="https://womeimingzi11.github.io/atom.xml" target="_blank">RSS</a>
-    </span>
-  </div>
-  <div class="sidebar-item sidebar-item-social">
-    <div class="social-item">
-      <a href="https://www.github.com/hsxyhao">
-        <i class="iconfont icon-github"></i> GitHub
-      </a>
-      <a href="">
-        <i class="iconfont icon-twitter"></i> Twitter
-      </a>
-    </div>
-    <div class="social-item">
-      <a href="">
-        <i class="iconfont icon-globe"></i> 豆瓣
-      </a>
-      <a href="">
-        <i class="iconfont icon-globe"></i> 知乎
-      </a>
-    </div>
-  </div>
-</div>
-</div>
-          <div class="section-box">
-            <section class="section posts-expand">
-              
-<div class="archive-timeline-box">
-  <div class="archive-timeline-title">
-    
-      <h2>非常好！目前共计1篇日志，继续努力！</h2>
-    
-  </div>
-  
-    
-    
-      <div class="node-title">
-        <h2 class="tag-year">2018</h2>
-      </div>    
       
     
-    <a href="https://womeimingzi11.github.io/post/hello-gridea">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            12-12
-            <small>Hello Gridea</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/womeimingzi11" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+        <a href="https://twitter.com/chenhan1992" target="_blank">
+          <i class="fab fa-twitter"></i>
+        </a>
+      
+    
+      
+        <a href="https://weibo.com/womeimingzi11" target="_blank">
+          <i class="fab fa-weibo"></i>
+        </a>
+      
+    
+      
+        <a href="https://www.zhihu.com/people/womeimingzi" target="_blank">
+          <i class="fab fa-zhihu"></i>
+        </a>
+      
+    
+      
+    
+  </div>
+</div>
+
+    
+        
+
+<div class="archives-container">
+  
+    <h2 class="year">2018</h2>
+    
+      
+        <a href="https://womeimingzi11.github.io/post/hello-gridea" class="post">
+          <h2 class="post-title">
+            Hello Gridea
+          </h2>
+          <div class="time">2018-12-12</div>
+        </a>
+      
+    
   
 </div>
 
-<div class="page">
-  <ul class="pagination-ul">
     
-    
-      
-        <li class="pagination-li pagination-active">
-            <a href="/archives/page/../">
-              1
-            </a>
-        </li>
-      
-    
-    
-  </ul>
+        <div class="pagination-container">
+  
+  
 </div>
 
-            </section>
-          </div>
-        </div>
-      </div>
-      <div class="footer-box">
-  <footer class="footer">
-    <div class="copyright">
-      © 2019-2020 <i class="iconfont icon-heart"></i> HsxyHao
-    </div>
-    <div class="poweredby">
-      <div class="power-left">Power By<a href="https://github.com/hsxyhao"> HsxyHao</a></div>
-      <div>Copy<a href="https://github.com/iissnan/hexo-theme-next"> Hexo Next Theme</a></div>
-    </div>
-  </footer>
-  <div class="back-to-top" id="back_to_top">
-    <i class="iconfont icon-arrow_up"></i>
-    <span class="scrollpercent">
-      <span id="back_to_top_text">100</span>%
-    </span>
-  </div>
+    
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://womeimingzi11.github.io/atom.xml" target="_blank">RSS</a>
 </div>
 
 <script>
+  hljs.initHighlightingOnLoad()
 
-  let body = document.body;
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
 
-  let back2Top = document.querySelector('#back_to_top'),
-  back2TopText = document.querySelector('#back_to_top_text');
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
 
-  function scrollAnimation(currentY, targetY) {
-   
-    let needScrollTop = targetY - currentY
-    let _currentY = currentY
-    setTimeout(() => {
-      const dist = Math.ceil(needScrollTop / 10)
-      _currentY += dist
-      window.scrollTo(_currentY, currentY)
-      if (needScrollTop > 10 || needScrollTop < -10) {
-        scrollAnimation(_currentY, targetY)
-      } else {
-        window.scrollTo(_currentY, targetY)
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
       }
-    }, 1)
-  }
-
-  back2Top.addEventListener("click", function(e) {
-    scrollAnimation(body.scrollTop, 0);
-    e.stopPropagation();
-    return false;
-  });
-  
-  window.addEventListener('scroll', function(e) {
-    let percent = body.scrollTop / (body.scrollHeight - body.clientHeight) * 100;
-    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
-      back2Top.classList.add('back-top-active');
-    }
-    if (percent == 0) {
-      back2Top.classList.remove('back-top-active');
-    }
-    back2TopText.textContent = Math.floor(percent);
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
   });
 
-  // 代码高亮
-  hljs.initHighlightingOnLoad();
 </script>
+
+      </div>
     </div>
   </body>
-  <script src="/media/js/motion.js"></script>
 </html>
