@@ -7,7 +7,7 @@
 <title>N1-PT下载小钢炮固件安装说明（转载自荒野无灯） - 洗衣机&#39;s Blog</title>
 <link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"> -->
 <link rel="stylesheet" href="https://womeimingzi11.github.io/media/css/tailwind.css">
 <link rel="stylesheet" href="https://womeimingzi11.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="N1-PT下载小钢炮固件安装说明（转载自荒野无灯） - 洗衣机&#39;s Blog - Atom Feed" href="https://womeimingzi11.github.io/atom.xml">
@@ -429,25 +429,7 @@ Token</code>等. 如果没有服务端,可用一键部署工具: <a href="https:
 
       
 
-      
-        <div id="vlaine-comment"></div>
-<script type="application/javascript" src="https://unpkg.com/valine"></script>
-<script type="application/javascript">
-  new Valine({
-    el: '#vlaine-comment',
-    appId: 'XJjs44pppOvqW2ntTcOnu8hX-gzGzoHsz',
-    appKey: '65rxSzySzrjIaQ8P0LWLNBdd',
-    pageSize: 10,
-    notify: true,
-    avatar: 'mp',
-    verify: true,
-    placeholder: '来都来了，不妨评论一下',
-    visitor: false,
-    highlight: true,
-    recordIP: false,
-  })
-</script>
-      
+      <div id="vlaine-comment"></div>
 
       <footer class="py-12 text-center px-4 md:px-0" v-pre>
   Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
@@ -625,6 +607,35 @@ Token</code>等. 如果没有服务端,可用一键部署工具: <a href="https:
     }
     //初始化
     initImg();
+  </script>
+  <script type="application/javascript" src="https://womeimingzi11.github.io/media/scripts/valine.min.js"></script>
+  <script type="application/javascript">
+  
+    // var valine = new Valine();
+    // valine.init({
+    //   el: '#vlaine-comment',
+    //   appId: 'XJjs44pppOvqW2ntTcOnu8hX-gzGzoHsz',
+    //   appKey: '65rxSzySzrjIaQ8P0LWLNBdd',
+    //   notify: true,
+    //   avatar: 'mp',
+    //   verify: true,
+    //   placeholder: '来都来了，不妨评论一下',
+    //   visitor: false,
+    //   highlight: true,
+    //   recordIP: false,
+    // })
+  
+    var valine = new Valine();
+    valine.init({
+      el: '#vlaine-comment',
+      appId: 'XJjs44pppOvqW2ntTcOnu8hX-gzGzoHsz',
+      appKey: '65rxSzySzrjIaQ8P0LWLNBdd',
+      notify: false,
+      verify: false,
+      visitor: true,
+      avatar: 'mp',
+      placeholder: '加入讨论...'
+    })
   </script>
 </body>
 
