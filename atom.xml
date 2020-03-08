@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://womeimingzi11.github.io</id>
     <title>洗衣机&apos;s Blog</title>
-    <updated>2020-02-25T10:25:59.860Z</updated>
+    <updated>2020-03-08T13:42:25.179Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://womeimingzi11.github.io"/>
     <link rel="self" href="https://womeimingzi11.github.io/atom.xml"/>
@@ -10,6 +10,111 @@
     <logo>https://womeimingzi11.github.io/images/avatar.png</logo>
     <icon>https://womeimingzi11.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 洗衣机&apos;s Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[Using R for Everything: 使用 ggplot2 可视化新型冠状病毒肺炎在中国的确诊分布]]></title>
+        <id>https://womeimingzi11.github.io/post/map_visualization_covid19_by_ggplot2/</id>
+        <link href="https://womeimingzi11.github.io/post/map_visualization_covid19_by_ggplot2/">
+        </link>
+        <updated>2020-03-08T13:36:10.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章受到 Anisa Dhana 的博文 <a href="https://datascienceplus.com/map-visualization-of-covid19-across-world/">‘Map Visualization of COVID-19 Across<br>
+the World with R’</a> 启发，尝试使用 R 语言绘制新冠肺炎 COVID-19 在国内的确诊、治愈和死亡地图。</p>
+<h2 id="数据准备">数据准备</h2>
+<h3 id="covid-19-data">COVID-19 Data</h3>
+<p>绘制地图的第一步是收集数据。</p>
+<p>首先，我们感谢约翰霍普金斯 CSSE <a href="https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases">Johns Hopkins CSSE</a>, 他们将全球的疫情数据按照日期制作成了单一的 CSV 文件方便进行各类分析和统计。我们可以从 <a href="https://github.com/CSSEGISandData/COVID-19">Github</a> 页面获得需要的数据。</p>
+<p>P.S. 非常建议大家直接使用 read_csv 从源 URL 直接获取数据，这样便于日后维护更新。但是因为个人原因，案例中使用下载至本地的 csv 作为数据源。此操作不影响后续的任务。</p>
+<pre><code>library(tidyverse)
+
+# Read the daily CSV file from Jons Hopkins CSSE I highly recommand to read_csv
+# from url directly. But for my personal reason I have to download csv and read
+# it from local path.
+
+# df_origin &lt;-
+# read_csv('http://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-07-2020.csv')
+df_origin &lt;- read_csv(&quot;03-07-2020.csv&quot;)
+
+# Replace the slash into underline to make it easyily to filter
+names(df_origin) &lt;- names(df_origin) %&gt;% str_replace_all(&quot;/&quot;, &quot;_&quot;)
+
+# Keep the data of mainland and three regions of China
+df_cov_china &lt;- filter(df_origin, Country_Region %in% c(&quot;Mainland China&quot;, &quot;Taiwan&quot;, 
+    &quot;Hong Kong&quot;, &quot;Macao&quot;))
+
+head(df_cov_china)
+
+## # A tibble: 6 x 8
+##   Province_State Country_Region `Last Update`       Confirmed Deaths Recovered
+##   &lt;chr&gt;          &lt;chr&gt;          &lt;dttm&gt;                  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+## 1 Hubei          Mainland China 2020-03-07 11:13:04     67666   2959     43500
+## 2 Guangdong      Mainland China 2020-03-07 10:43:02      1352      7      1237
+## 3 Henan          Mainland China 2020-03-07 11:23:10      1272     22      1244
+## 4 Zhejiang       Mainland China 2020-03-07 09:03:05      1215      1      1154
+## 5 Hunan          Mainland China 2020-03-07 09:03:05      1018      4       960
+## 6 Anhui          Mainland China 2020-03-06 03:23:06       990      6       979
+## # ... with 2 more variables: Latitude &lt;dbl&gt;, Longitude &lt;dbl&gt;
+</code></pre>
+<h3 id="map-data">Map Data</h3>
+<p>我们采用了包含两岸三地、藏南、阿克赛钦以及南海九段线的完整中华人民共和国的行政区划地图。这些数据将会托管在 Github 上进行分享，大家可以按需取用。</p>
+<pre><code>library(rgdal)
+
+# Read China Admistrative Area data from Shapefile.  To avoid the compatibility
+# issue across systems, including Unix-like system and Windows. I highly
+# recommand to use the file.path function to create the file paths.
+map_cn_area &lt;- file.path(&quot;mapData&quot;, &quot;China_adm_area.shp&quot;) %&gt;% readOGR()
+
+## OGR data source with driver: ESRI Shapefile 
+## Source: &quot;C:\Users\chenh\OneDrive\Develop Learn\R\Map Visualization of COVID-19 Across China with R\mapData\China_adm_area.shp&quot;, layer: &quot;China_adm_area&quot;
+## with 34 features
+## It has 10 fields
+
+# Conver the SpatialPolygonsDataFrame to DataFrame which can be held by ggplot2
+df_cn_area &lt;- fortify(map_cn_area)
+
+# Read the names of Province or region, and convert the name from PinYin to
+# English.  This can match the Province name between WHO data and map data.
+ls_province_name &lt;- map_cn_area@data$ID %&gt;% str_replace(&quot;Xianggang&quot;, &quot;Hong Kong&quot;) %&gt;% 
+    str_replace(&quot;Aomen&quot;, &quot;Macao&quot;)
+
+# The id is the unique serial to recongize the different province from map data.
+ls_id &lt;- unique(df_cn_area$id)
+
+# The orders of id and province name is all the same, the bind operation will
+# combine the province name and id in different data.frame Use Proveince_State to
+# Join data from WHO data and map data
+df_final &lt;- df_cn_area %&gt;% left_join(bind_cols(Province_State = ls_province_name, 
+    id = ls_id)) %&gt;% left_join(df_cov_china, by = &quot;Province_State&quot;)
+
+# Read the boundary of provinces and regions from shapefile, it will be a
+# SpatialLinesDataFrame
+map_cn_bord &lt;- file.path(&quot;mapData&quot;, &quot;China_adm_bord.shp&quot;) %&gt;% readOGR()
+
+## OGR data source with driver: ESRI Shapefile 
+## Source: &quot;C:\Users\chenh\OneDrive\Develop Learn\R\Map Visualization of COVID-19 Across China with R\mapData\China_adm_bord.shp&quot;, layer: &quot;China_adm_bord&quot;
+## with 1785 features
+## It has 8 fields
+## Integer64 fields read as strings:  FNODE_ TNODE_ LPOLY_ RPOLY_ BOU2_4M_ BOU2_4M_ID
+
+df_cn_bord &lt;- fortify(map_cn_bord)
+</code></pre>
+<h2 id="数据可视化">数据可视化</h2>
+<p>当所有的数据准备完成，便可以使用 ggplot2 进行可视化操作。使用 geom_polygon 来绘制不同行政区，因为数据类型是 <code>SpatialPolygonsDataFrame</code> 而使用 geom_path 来绘制行政区的边界，因为数据类型是<code>SpatialLinesDataFrame</code>。</p>
+<p>我们需要额外考虑的问题是，因为武汉的患者数量数倍于国内其他区域范围内的患者数量，故此为了能够较为有层次的显示病患数量，我们将数据进行<em>平方根开方</em>处理。</p>
+<pre><code>library(ggplot2)
+# The group is unique serial of each province and region, in this case, it is
+# similar with id.  Use geom_polygon to plot the area part, and use geom_path to
+# plot the boundary part.  To make the data can be comparable, the patients in
+# Hubei Province are multiple times than those in other provinces and regions,
+# the data is root-square transformed.
+ggplot() + geom_polygon(aes(x = long, y = lat, group = group, fill = sqrt(Confirmed)), 
+    data = df_final) + geom_path(aes(x = long, y = lat, group = group), color = &quot;black&quot;, 
+    data = df_cn_bord) + labs(caption = &quot;Data Repository provided by Johns Hopkins CSSE. Visualization by Han Chen&quot;) + 
+    guides(fill = guide_legend(title = &quot;确诊人数\n（开平方处理）&quot;)) + theme(text = element_text(color = &quot;#22211d&quot;), 
+    plot.background = element_rect(fill = &quot;#ffffff&quot;, color = NA), panel.background = element_rect(fill = &quot;#ffffff&quot;, 
+        color = NA), legend.background = element_rect(fill = &quot;#ffffff&quot;, color = NA))
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://picgo-1256649726.cos.ap-chengdu.myqcloud.com/mapVisualization_confirmed-1.png" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Using R for Everything: 使用 ggplot2 绘制 RasterLayer 地图]]></title>
         <id>https://womeimingzi11.github.io/post/using-r-for-everything-shi-yong-ggplot2-hui-zhi-rasterlayer-di-tu/</id>

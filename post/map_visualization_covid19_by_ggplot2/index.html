@@ -1,0 +1,432 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Using R for Everything: 使用 ggplot2 可视化新型冠状病毒肺炎在中国的确诊分布 - 洗衣机&#39;s Blog</title>
+<link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"> -->
+<link rel="stylesheet" href="https://womeimingzi11.github.io/media/css/tailwind.css">
+<link rel="stylesheet" href="https://womeimingzi11.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Using R for Everything: 使用 ggplot2 可视化新型冠状病毒肺炎在中国的确诊分布 - 洗衣机&#39;s Blog - Atom Feed" href="https://womeimingzi11.github.io/atom.xml">
+
+    
+
+  <meta name="description" content="这篇文章受到 Anisa Dhana 的博文 ‘Map Visualization of COVID-19 Across
+the World with R’ 启发，尝试使用 R 语言绘制新冠肺炎 COVID-19 在国内的确诊、治愈和死亡地..." />
+  <meta property="og:title" content="Using R for Everything: 使用 ggplot2 可视化新型冠状病毒肺炎在中国的确诊分布 - 洗衣机&#39;s Blog">
+  <meta property="og:description" content="这篇文章受到 Anisa Dhana 的博文 ‘Map Visualization of COVID-19 Across
+the World with R’ 启发，尝试使用 R 语言绘制新冠肺炎 COVID-19 在国内的确诊、治愈和死亡地..." />
+  <meta property="og:type" content="articles">
+  <meta property="og:url" content="https://womeimingzi11.github.io/post/map_visualization_covid19_by_ggplot2/" />
+  <meta property="og:image" content="https://picgo-1256649726.cos.ap-chengdu.myqcloud.com/mapVisualization_confirmed-1.png">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta name="twitter:title" content="Using R for Everything: 使用 ggplot2 可视化新型冠状病毒肺炎在中国的确诊分布 - 洗衣机&#39;s Blog">
+  <meta name="twitter:description" content="这篇文章受到 Anisa Dhana 的博文 ‘Map Visualization of COVID-19 Across
+the World with R’ 启发，尝试使用 R 语言绘制新冠肺炎 COVID-19 在国内的确诊、治愈和死亡地...">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://womeimingzi11.github.io/post/map_visualization_covid19_by_ggplot2/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+ 
+  
+    <link rel="stylesheet" href="https://womeimingzi11.github.io/media/css/prism-atom-dark.css">
+  
+
+  
+</head>
+
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+    <a href="https://womeimingzi11.github.io" class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+      洗衣机&#39;s Blog
+    </a>
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+        <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+          Using R for Everything: 使用 ggplot2 可视化新型冠状病毒肺炎在中国的确诊分布
+        </h1>
+        
+          <img src="https://picgo-1256649726.cos.ap-chengdu.myqcloud.com/mapVisualization_confirmed-1.png" alt="Using R for Everything: 使用 ggplot2 可视化新型冠状病毒肺炎在中国的确诊分布" class="block w-full mb-8">
+        
+        <div class="mb-8 flex flex-wrap">
+          <div class="text-gray-400 text-sm mr-4">2020-03-08 · 6 min read</div>
+          
+            <a href="https://womeimingzi11.github.io/tag/vkU0Dequq/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              COVID-19
+            </a>
+          
+            <a href="https://womeimingzi11.github.io/tag/8E2Niuzh90/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              新冠肺炎
+            </a>
+          
+            <a href="https://womeimingzi11.github.io/tag/d7X1pK5ekG/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              可视化
+            </a>
+          
+            <a href="https://womeimingzi11.github.io/tag/X1VkNLzBV/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              R
+            </a>
+          
+            <a href="https://womeimingzi11.github.io/tag/8xWK8dff-f/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              ggplot2
+            </a>
+          
+            <a href="https://womeimingzi11.github.io/tag/NOVxTpueqQ/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              using-r-for-everything
+            </a>
+          
+        </div>
+        <div class="markdown mb-8" v-pre>
+          <p>这篇文章受到 Anisa Dhana 的博文 <a href="https://datascienceplus.com/map-visualization-of-covid19-across-world/">‘Map Visualization of COVID-19 Across<br>
+the World with R’</a> 启发，尝试使用 R 语言绘制新冠肺炎 COVID-19 在国内的确诊、治愈和死亡地图。</p>
+<h2 id="数据准备">数据准备</h2>
+<h3 id="covid-19-data">COVID-19 Data</h3>
+<p>绘制地图的第一步是收集数据。</p>
+<p>首先，我们感谢约翰霍普金斯 CSSE <a href="https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases">Johns Hopkins CSSE</a>, 他们将全球的疫情数据按照日期制作成了单一的 CSV 文件方便进行各类分析和统计。我们可以从 <a href="https://github.com/CSSEGISandData/COVID-19">Github</a> 页面获得需要的数据。</p>
+<p>P.S. 非常建议大家直接使用 read_csv 从源 URL 直接获取数据，这样便于日后维护更新。但是因为个人原因，案例中使用下载至本地的 csv 作为数据源。此操作不影响后续的任务。</p>
+<pre><code>library(tidyverse)
+
+# Read the daily CSV file from Jons Hopkins CSSE I highly recommand to read_csv
+# from url directly. But for my personal reason I have to download csv and read
+# it from local path.
+
+# df_origin &lt;-
+# read_csv('http://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-07-2020.csv')
+df_origin &lt;- read_csv(&quot;03-07-2020.csv&quot;)
+
+# Replace the slash into underline to make it easyily to filter
+names(df_origin) &lt;- names(df_origin) %&gt;% str_replace_all(&quot;/&quot;, &quot;_&quot;)
+
+# Keep the data of mainland and three regions of China
+df_cov_china &lt;- filter(df_origin, Country_Region %in% c(&quot;Mainland China&quot;, &quot;Taiwan&quot;, 
+    &quot;Hong Kong&quot;, &quot;Macao&quot;))
+
+head(df_cov_china)
+
+## # A tibble: 6 x 8
+##   Province_State Country_Region `Last Update`       Confirmed Deaths Recovered
+##   &lt;chr&gt;          &lt;chr&gt;          &lt;dttm&gt;                  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+## 1 Hubei          Mainland China 2020-03-07 11:13:04     67666   2959     43500
+## 2 Guangdong      Mainland China 2020-03-07 10:43:02      1352      7      1237
+## 3 Henan          Mainland China 2020-03-07 11:23:10      1272     22      1244
+## 4 Zhejiang       Mainland China 2020-03-07 09:03:05      1215      1      1154
+## 5 Hunan          Mainland China 2020-03-07 09:03:05      1018      4       960
+## 6 Anhui          Mainland China 2020-03-06 03:23:06       990      6       979
+## # ... with 2 more variables: Latitude &lt;dbl&gt;, Longitude &lt;dbl&gt;
+</code></pre>
+<h3 id="map-data">Map Data</h3>
+<p>我们采用了包含两岸三地、藏南、阿克赛钦以及南海九段线的完整中华人民共和国的行政区划地图。这些数据将会托管在 Github 上进行分享，大家可以按需取用。</p>
+<pre><code>library(rgdal)
+
+# Read China Admistrative Area data from Shapefile.  To avoid the compatibility
+# issue across systems, including Unix-like system and Windows. I highly
+# recommand to use the file.path function to create the file paths.
+map_cn_area &lt;- file.path(&quot;mapData&quot;, &quot;China_adm_area.shp&quot;) %&gt;% readOGR()
+
+## OGR data source with driver: ESRI Shapefile 
+## Source: &quot;C:\Users\chenh\OneDrive\Develop Learn\R\Map Visualization of COVID-19 Across China with R\mapData\China_adm_area.shp&quot;, layer: &quot;China_adm_area&quot;
+## with 34 features
+## It has 10 fields
+
+# Conver the SpatialPolygonsDataFrame to DataFrame which can be held by ggplot2
+df_cn_area &lt;- fortify(map_cn_area)
+
+# Read the names of Province or region, and convert the name from PinYin to
+# English.  This can match the Province name between WHO data and map data.
+ls_province_name &lt;- map_cn_area@data$ID %&gt;% str_replace(&quot;Xianggang&quot;, &quot;Hong Kong&quot;) %&gt;% 
+    str_replace(&quot;Aomen&quot;, &quot;Macao&quot;)
+
+# The id is the unique serial to recongize the different province from map data.
+ls_id &lt;- unique(df_cn_area$id)
+
+# The orders of id and province name is all the same, the bind operation will
+# combine the province name and id in different data.frame Use Proveince_State to
+# Join data from WHO data and map data
+df_final &lt;- df_cn_area %&gt;% left_join(bind_cols(Province_State = ls_province_name, 
+    id = ls_id)) %&gt;% left_join(df_cov_china, by = &quot;Province_State&quot;)
+
+# Read the boundary of provinces and regions from shapefile, it will be a
+# SpatialLinesDataFrame
+map_cn_bord &lt;- file.path(&quot;mapData&quot;, &quot;China_adm_bord.shp&quot;) %&gt;% readOGR()
+
+## OGR data source with driver: ESRI Shapefile 
+## Source: &quot;C:\Users\chenh\OneDrive\Develop Learn\R\Map Visualization of COVID-19 Across China with R\mapData\China_adm_bord.shp&quot;, layer: &quot;China_adm_bord&quot;
+## with 1785 features
+## It has 8 fields
+## Integer64 fields read as strings:  FNODE_ TNODE_ LPOLY_ RPOLY_ BOU2_4M_ BOU2_4M_ID
+
+df_cn_bord &lt;- fortify(map_cn_bord)
+</code></pre>
+<h2 id="数据可视化">数据可视化</h2>
+<p>当所有的数据准备完成，便可以使用 ggplot2 进行可视化操作。使用 geom_polygon 来绘制不同行政区，因为数据类型是 <code>SpatialPolygonsDataFrame</code> 而使用 geom_path 来绘制行政区的边界，因为数据类型是<code>SpatialLinesDataFrame</code>。</p>
+<p>我们需要额外考虑的问题是，因为武汉的患者数量数倍于国内其他区域范围内的患者数量，故此为了能够较为有层次的显示病患数量，我们将数据进行<em>平方根开方</em>处理。</p>
+<pre><code>library(ggplot2)
+# The group is unique serial of each province and region, in this case, it is
+# similar with id.  Use geom_polygon to plot the area part, and use geom_path to
+# plot the boundary part.  To make the data can be comparable, the patients in
+# Hubei Province are multiple times than those in other provinces and regions,
+# the data is root-square transformed.
+ggplot() + geom_polygon(aes(x = long, y = lat, group = group, fill = sqrt(Confirmed)), 
+    data = df_final) + geom_path(aes(x = long, y = lat, group = group), color = &quot;black&quot;, 
+    data = df_cn_bord) + labs(caption = &quot;Data Repository provided by Johns Hopkins CSSE. Visualization by Han Chen&quot;) + 
+    guides(fill = guide_legend(title = &quot;确诊人数\n（开平方处理）&quot;)) + theme(text = element_text(color = &quot;#22211d&quot;), 
+    plot.background = element_rect(fill = &quot;#ffffff&quot;, color = NA), panel.background = element_rect(fill = &quot;#ffffff&quot;, 
+        color = NA), legend.background = element_rect(fill = &quot;#ffffff&quot;, color = NA))
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://picgo-1256649726.cos.ap-chengdu.myqcloud.com/mapVisualization_confirmed-1.png" alt="" loading="lazy"></figure>
+
+        </div>
+        <!-- Share to Twitter, Weibo, Telegram -->
+        <div class="flex items-center">
+          <div class="mr-4 flex items-center">
+            <i class="ri-share-forward-line text-gray-500"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTwitter">
+            <i class="ri-twitter-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex" @click="shareToWeibo">
+            <i class="ri-weibo-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTelegram">
+            <i class="ri-telegram-line"></i>
+          </div>
+        </div>
+      </div>
+
+      
+
+      <div id="vlaine-comment"></div>
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</footer>
+    </div>
+
+    <!-- TOC Container -->
+    <div class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight" @click="showToc = true">
+      <i class="ri-file-list-line"></i>
+    </div>
+
+    <div class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast" :class="{ '-mr-64': !showToc }">
+      <div class="flex mb-4 justify-end">
+        <div class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast" @click="showToc = false">
+          <i class="ri-close-line text-lg"></i>
+        </div>
+      </div>
+      <div class="post-toc-container">
+        <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87">数据准备</a>
+<ul>
+<li><a href="#covid-19-data">COVID-19 Data</a></li>
+<li><a href="#map-data">Map Data</a></li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96">数据可视化</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200" @click="backToUp" v-show="scrolled">
+      <i class="ri-arrow-up-line"></i>
+    </div>
+  </div>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe. 
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg">
+  </div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter">
+        </div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip">
+        </div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      </button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      </button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://womeimingzi11.github.io/media/scripts/main.js"></script>
+  
+  <!-- Code Highlight -->
+  
+    <script src="https://womeimingzi11.github.io/media/prism.js"></script>
+    <script>
+      Prism.highlightAll()
+    </script>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+  <script>
+    //拿到预览框架，也就是上面的html代码
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    //定义图片数组变量
+    var imgitems;
+    /**
+    * 用于显示预览界面
+    * @param index 图片数组下标
+    */
+    function viewImg(index) {
+      //其它选项这里不做过多阐述，详情见官网
+      var pswpoptions = {
+        index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+        bgOpacity: 0.7, // 背景透明度，0-1
+        maxSpreadZoom: 3, // 缩放级别，不要太大
+      };
+      //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+      var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, imgitems, pswpoptions);
+      gallery.init()
+    }
+    /**
+    * 用于添加图片点击事件
+    * @param img 图片元素
+    * @param index 所属下标（在imgitems中的位置）
+    */
+    function addImgClick(img, index) {
+      img.onclick = function() {
+        viewImg(index)
+      }
+    }
+    /**
+    * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+    * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+    * 异步加载图片可在图片元素创建完成后调用此方法
+    */
+    function initImg() {
+      //重置图片数组
+      imgitems = [];
+      //查找class:markdown 下的所有img元素并遍历
+      var imgs = document.querySelectorAll('.markdown img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        //本站相册初始为loading图片，真实图片放在data-src
+        var ds = img.getAttribute("data-src");
+        //创建image对象，用于获取图片宽高
+        var imgtemp = new Image();
+        //判断是否存在data-src
+        if (ds != null && ds.length > 0) {
+          imgtemp.src = ds
+        } else {
+          imgtemp.src = img.src
+        }
+        //判断是否存在缓存
+        if (imgtemp.complete) {
+          var imgobj = {
+            "src": imgtemp.src,
+            "w": imgtemp.width,
+            "h": imgtemp.height,
+          };
+          imgitems[i] = imgobj;
+          addImgClick(img, i);
+        } else {
+          console.log('进来了2')
+          imgtemp.index = i;
+          imgtemp.img = img;
+          imgtemp.onload = function() {
+            var imgobj = {
+              "src": this.src,
+              "w": this.width,
+              "h": this.height,
+            };
+            //不要使用push，因为onload前后顺序会不同
+            imgitems[this.index] = imgobj
+            //添加点击事件
+            addImgClick(this.img, this.index);
+          }
+        }
+      }
+    }
+    //初始化
+    initImg();
+  </script>
+  <script type="application/javascript" src="https://womeimingzi11.github.io/media/scripts/valine.min.js"></script>
+  <script type="application/javascript">
+  
+    // var valine = new Valine();
+    // valine.init({
+    //   el: '#vlaine-comment',
+    //   appId: 'XJjs44pppOvqW2ntTcOnu8hX-gzGzoHsz',
+    //   appKey: '65rxSzySzrjIaQ8P0LWLNBdd',
+    //   notify: true,
+    //   avatar: 'mp',
+    //   verify: true,
+    //   placeholder: '来都来了，不妨评论一下',
+    //   visitor: false,
+    //   highlight: true,
+    //   recordIP: false,
+    // })
+  
+    var valine = new Valine();
+    valine.init({
+      el: '#vlaine-comment',
+      appId: 'XJjs44pppOvqW2ntTcOnu8hX-gzGzoHsz',
+      appKey: '65rxSzySzrjIaQ8P0LWLNBdd',
+      notify: false,
+      verify: false,
+      visitor: true,
+      avatar: 'mp',
+      placeholder: '加入讨论...'
+    })
+  </script>
+</body>
+
+</html>
