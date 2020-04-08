@@ -1,102 +1,202 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>洗衣机用户不会用洗衣机</title>
-<link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
-<link rel="stylesheet" href="https://womeimingzi11.github.io/media/css/tailwind.css">
+<meta name="description" content="Why be a researcher if you can be an Engineer?" />
+<link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico?v=1586319542565">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://womeimingzi11.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="洗衣机用户不会用洗衣机 - Atom Feed" href="https://womeimingzi11.github.io/atom.xml">
 
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://womeimingzi11.github.io">
+  <img class="avatar" src="https://womeimingzi11.github.io/images/avatar.png?v=1586319542565" alt="">
+  </a>
+  <h1 class="site-title">
+    洗衣机用户不会用洗衣机
+  </h1>
+  <p class="site-description">
+    Why be a researcher if you can be an Engineer?
+  </p>
+  <div class="menu-container">
     
-
-  <meta name="description" content="Why be a researcher if you can be an Engineer?" />
-</head>
-<body>
-  <div class="antialiased flex flex-col min-h-screen" id="app">
-
-    <div class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300" :class="{ 'scroll': scrolled }">
-  <div class="flex justify-end px-4">
-    <div class="w-8 h-8 flex justify-center items-center rounded-full md:hidden" @click="showMenu = !showMenu">
-      <i class="ri-close-line" v-show="showMenu"></i>
-      <i class="ri-menu-3-line" v-show="!showMenu"></i>
-    </div>
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
   </div>
-  <nav class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block" :class="`${ showMenu ? 'block' : 'hidden' }`">
+  <div class="social-container">
     
-      <a href="/" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        首页
-      </a>
+      
+        <a href="https://github.com/womeimingzi11" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
     
-      <a href="/archives" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        归档
-      </a>
+      
+        <a href="https://twitter.com/chenhan1992" target="_blank">
+          <i class="fab fa-twitter"></i>
+        </a>
+      
     
-      <a href="/tags" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        标签
-      </a>
+      
+        <a href="https://weibo.com/womeimingzi11" target="_blank">
+          <i class="fab fa-weibo"></i>
+        </a>
+      
     
-      <a href="/post/about" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        关于
-      </a>
+      
+        <a href="https://www.zhihu.com/people/womeimingzi" target="_blank">
+          <i class="fab fa-zhihu"></i>
+        </a>
+      
     
-    <a href="https://womeimingzi11.github.io/atom.xml" target="_blank" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-      RSS
-    </a>
-  </nav>
+      
+    
+  </div>
 </div>
 
-    <div class="max-w-4xl w-full mx-auto pt-32">
-      <div class="py-8 shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+    
         
-          <div class="px-8 pb-5 flex relative overflow-hidden">
-            
-            <div class="flex-1">
-              <a href="https://womeimingzi11.github.io/post/she-bei-guan-li-qi-zhong-de-mvsi-card-reader-usb-device-driver-shi-shi-me-ru-he-yi-chu-qi-zhan-yong-pan-fu/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-                设备管理器中的 MVSI Card Reader USB Device driver 是什么？如何移除其占用盘符？
-              </a>
-            </div>
-          </div>
-        
-          <div class="px-8 pb-5 flex relative overflow-hidden">
-            
-            <div class="flex-1">
-              <a href="https://womeimingzi11.github.io/post/map_visualization_covid19_by_ggplot2/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-                Using R for Everything: 使用 ggplot2 可视化新型冠状病毒肺炎在中国的确诊分布
-              </a>
-            </div>
-          </div>
-        
-          <div class="px-8 pb-5 flex relative overflow-hidden">
-            
-            <div class="flex-1">
-              <a href="https://womeimingzi11.github.io/post/using-r-for-everything-shi-yong-ggplot2-hui-zhi-rasterlayer-di-tu/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-                Using R for Everything: 使用 ggplot2 绘制 RasterLayer 地图
-              </a>
-            </div>
-          </div>
-        
-          <div class="px-8 pb-5 flex relative overflow-hidden">
-            
-            <div class="flex-1">
-              <a href="https://womeimingzi11.github.io/post/ph1-n1-xiaogangpao/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-                N1-PT下载小钢炮固件安装说明（转载自荒野无灯）
-              </a>
-            </div>
-          </div>
-        
-      </div>
 
+<div class="archives-container">
+  
+    <h2 class="year">2020</h2>
+    
       
-      <footer class="py-12 text-center px-4 md:px-0" v-pre>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-</footer>
+        <a href="https://womeimingzi11.github.io/post/she-bei-guan-li-qi-zhong-de-mvsi-card-reader-usb-device-driver-shi-shi-me-ru-he-yi-chu-qi-zhan-yong-pan-fu/" class="post">
+          <h2 class="post-title">
+            设备管理器中的 MVSI Card Reader USB Device driver 是什么？如何移除其占用盘符？
+          </h2>
+          <div class="time">2020-03-23</div>
+        </a>
+      
+    
+      
+        <a href="https://womeimingzi11.github.io/post/map_visualization_covid19_by_ggplot2/" class="post">
+          <h2 class="post-title">
+            Using R for Everything: 使用 ggplot2 可视化新型冠状病毒肺炎在中国的确诊分布
+          </h2>
+          <div class="time">2020-03-08</div>
+        </a>
+      
+    
+      
+        <a href="https://womeimingzi11.github.io/post/using-r-for-everything-shi-yong-ggplot2-hui-zhi-rasterlayer-di-tu/" class="post">
+          <h2 class="post-title">
+            Using R for Everything: 使用 ggplot2 绘制 RasterLayer 地图
+          </h2>
+          <div class="time">2020-02-19</div>
+        </a>
+      
+    
+      
+    
+  
+    <h2 class="year">2019</h2>
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="https://womeimingzi11.github.io/post/ph1-n1-xiaogangpao/" class="post">
+          <h2 class="post-title">
+            N1-PT下载小钢炮固件安装说明（转载自荒野无灯）
+          </h2>
+          <div class="time">2019-12-27</div>
+        </a>
+      
+    
+  
+</div>
+
+    
+        <div class="pagination-container">
+  
+  
+</div>
+
+    
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://womeimingzi11.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
     </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://womeimingzi11.github.io/media/scripts/main.js"></script>
-</body>
+  </body>
 </html>
