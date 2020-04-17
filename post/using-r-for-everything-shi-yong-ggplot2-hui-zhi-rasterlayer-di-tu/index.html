@@ -1,127 +1,105 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" >
+
 <title>Using R for Everything: 使用 ggplot2 绘制 RasterLayer 地图 | 洗衣机用户不会用洗衣机</title>
-<meta name="description" content="Why be a researcher if you can be an Engineer?" />
-<link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico?v=1587115301819">
+<meta name="description" content="Why be a researcher if you can be an Engineer?">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico?v=1587126639951">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://womeimingzi11.github.io/styles/main.css">
 
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 
 
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://womeimingzi11.github.io">
-  <img class="avatar" src="https://womeimingzi11.github.io/images/avatar.png?v=1587115301819" alt="">
-  </a>
-  <h1 class="site-title">
-    洗衣机用户不会用洗衣机
-  </h1>
-  <p class="site-description">
-    Why be a researcher if you can be an Engineer?
-  </p>
-  <div class="menu-container">
-    
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://womeimingzi11.github.io">
+        <img src="https://womeimingzi11.github.io/images/avatar.png?v=1587126639951" class="site-logo">
+        <h1 class="site-title">洗衣机用户不会用洗衣机</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
       
-        <a href="/" class="menu">
-          首页
-        </a>
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
       
-    
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
       
-        <a href="/archives" class="menu">
-          归档
-        </a>
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
       
-    
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
       
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
+    </div>
   </div>
-  <div class="social-container">
-    
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
       
-        <a href="https://github.com/womeimingzi11" target="_blank">
-          <i class="fab fa-github"></i>
-        </a>
+        
       
-    
+        
       
-        <a href="https://twitter.com/chenhan1992" target="_blank">
-          <i class="fab fa-twitter"></i>
-        </a>
+        
       
-    
+        
       
-        <a href="https://weibo.com/womeimingzi11" target="_blank">
-          <i class="fab fa-weibo"></i>
-        </a>
+        
       
-    
-      
-        <a href="https://www.zhihu.com/people/womeimingzi" target="_blank">
-          <i class="fab fa-zhihu"></i>
-        </a>
-      
-    
-      
-    
+    </div>
+    <div class="site-description">
+      Why be a researcher if you can be an Engineer?
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://womeimingzi11.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
   </div>
 </div>
 
-        <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              Using R for Everything: 使用 ggplot2 绘制 RasterLayer 地图
-            </h2>
-            <div class="post-info">
-              <span>
-                2020-02-19
-              </span>
-              <span>
-                17 min read
-              </span>
-              
-                <a href="https://womeimingzi11.github.io/tag/X1VkNLzBV/" class="post-tag">
-                  # R
-                </a>
-              
-                <a href="https://womeimingzi11.github.io/tag/8xWK8dff-f/" class="post-tag">
-                  # ggplot2
-                </a>
-              
-                <a href="https://womeimingzi11.github.io/tag/ENAyDyZ5tK/" class="post-tag">
-                  # ecology
-                </a>
-              
-                <a href="https://womeimingzi11.github.io/tag/NOVxTpueqQ/" class="post-tag">
-                  # using-r-for-everything
-                </a>
-              
-            </div>
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Using R for Everything: 使用 ggplot2 绘制 RasterLayer 地图</h2>
+            <div class="post-date">2020-02-19</div>
             
-              <img class="post-feature-image" src="https://picgo-1256649726.cos.ap-chengdu.myqcloud.com/gmap.jpg" alt="">
+              <div class="feature-container" style="background-image: url('https://picgo-1256649726.cos.ap-chengdu.myqcloud.com/gmap.jpg')">
+              </div>
             
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <p>Han (<a href="mailto:chenhan28@gmail.com" class="email">chenhan28@gmail.com</a>)<br>
+            <div class="post-content">
+              <p>Han (<a href="mailto:chenhan28@gmail.com" class="email">chenhan28@gmail.com</a>)<br>
 在最近刚刚完成的一篇 SCI 文章中，为了描述实验的采样范围，通过 ggplot2 包 (Wickham et al. 2019) 将一组 RasterLayer 绘制成为了青藏高原的地形图。考虑到使用 R 绘制地图的中文内容较少，我们进行一次回顾。</p>
 <p><strong>PS 因为不是地理方面的文章/专业，所以在专业性方面有欠缺，但对于自然科学类文章中进行展示基本上是足够了。</strong></p>
 <h2 id="为什么用-ggplot2-画地图">为什么用 ggplot2 画地图？</h2>
@@ -378,85 +356,66 @@ the ’Tidyverse’.” <a href="https://CRAN.R-project.org/package=tidyverse">h
 <p>张镱锂, 李炳元, and 郑度. 2002. “论青藏高原范围与面积.” <em>地理学报</em> 21 (1): 1–8. <a href="https://doi.org/10.11821/yj2002010001">https://doi.org/10.11821/yj2002010001</a>.</p>
 </div>
 </div>
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8-ggplot2-%E7%94%BB%E5%9C%B0%E5%9B%BE">为什么用 ggplot2 画地图？</a></li>
-<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF-rasterlayer">什么是 RasterLayer？</a></li>
-<li><a href="#%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87">数据准备</a></li>
-<li><a href="#%E5%9C%B0%E5%9B%BE%E7%BB%98%E5%88%B6">地图绘制</a></li>
-<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
-</ul>
-</li>
-</ul>
-
-              </div>
             </div>
-          </article>
-        </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://womeimingzi11.github.io/tag/X1VkNLzBV/" class="tag">
+                    R
+                  </a>
+                
+                  <a href="https://womeimingzi11.github.io/tag/8xWK8dff-f/" class="tag">
+                    ggplot2
+                  </a>
+                
+                  <a href="https://womeimingzi11.github.io/tag/ENAyDyZ5tK/" class="tag">
+                    ecology
+                  </a>
+                
+                  <a href="https://womeimingzi11.github.io/tag/NOVxTpueqQ/" class="tag">
+                    using-r-for-everything
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://womeimingzi11.github.io/post/ph1-n1-xiaogangpao/">
+                  <h3 class="post-title">
+                    N1-PT下载小钢炮固件安装说明（转载自荒野无灯）
+                  </h3>
+                </a>
+              </div>
+            
 
-        
-          <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://womeimingzi11.github.io/post/ph1-n1-xiaogangpao/">
-              <h3 class="post-title">
-                N1-PT下载小钢炮固件安装说明（转载自荒野无灯）
-              </h3>
-            </a>
+            
+
           </div>
-        
 
-        
+        </div>
+      </div>
+    </div>
 
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
-  <a class="rss" href="https://womeimingzi11.github.io/atom.xml" target="_blank">RSS</a>
-</div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
-<script>
-  hljs.initHighlightingOnLoad()
+<script type="application/javascript">
 
-  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+AOS.init();
 
-  // This should probably be throttled.
-  // Especially because it triggers during smooth scrolling.
-  // https://lodash.com/docs/4.17.10#throttle
-  // You could do like...
-  // window.addEventListener("scroll", () => {
-  //    _.throttle(doThatStuff, 100);
-  // });
-  // Only not doing it here to keep this Pen dependency-free.
+hljs.initHighlightingOnLoad()
 
-  window.addEventListener("scroll", event => {
-    let fromTop = window.scrollY;
-
-    mainNavLinks.forEach((link, index) => {
-      let section = document.getElementById(decodeURI(link.hash).substring(1));
-      let nextSection = null
-      if (mainNavLinks[index + 1]) {
-        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-      }
-      if (section.offsetTop <= fromTop) {
-        if (nextSection) {
-          if (nextSection.offsetTop > fromTop) {
-            link.classList.add("current");
-          } else {
-            link.classList.remove("current");    
-          }
-        } else {
-          link.classList.add("current");
-        }
-      } else {
-        link.classList.remove("current");
-      }
-    });
-  });
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
 
-      </div>
-    </div>
+
+
+
   </body>
 </html>

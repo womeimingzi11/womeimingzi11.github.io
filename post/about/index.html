@@ -1,109 +1,102 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" >
+
 <title>关于 | 洗衣机用户不会用洗衣机</title>
-<meta name="description" content="Why be a researcher if you can be an Engineer?" />
-<link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico?v=1587115301819">
+<meta name="description" content="Why be a researcher if you can be an Engineer?">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico?v=1587126639951">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://womeimingzi11.github.io/styles/main.css">
 
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 
 
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://womeimingzi11.github.io">
-  <img class="avatar" src="https://womeimingzi11.github.io/images/avatar.png?v=1587115301819" alt="">
-  </a>
-  <h1 class="site-title">
-    洗衣机用户不会用洗衣机
-  </h1>
-  <p class="site-description">
-    Why be a researcher if you can be an Engineer?
-  </p>
-  <div class="menu-container">
-    
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://womeimingzi11.github.io">
+        <img src="https://womeimingzi11.github.io/images/avatar.png?v=1587126639951" class="site-logo">
+        <h1 class="site-title">洗衣机用户不会用洗衣机</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
       
-        <a href="/" class="menu">
-          首页
-        </a>
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
       
-    
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
       
-        <a href="/archives" class="menu">
-          归档
-        </a>
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
       
-    
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
       
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
+    </div>
   </div>
-  <div class="social-container">
-    
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
       
-        <a href="https://github.com/womeimingzi11" target="_blank">
-          <i class="fab fa-github"></i>
-        </a>
+        
       
-    
+        
       
-        <a href="https://twitter.com/chenhan1992" target="_blank">
-          <i class="fab fa-twitter"></i>
-        </a>
+        
       
-    
+        
       
-        <a href="https://weibo.com/womeimingzi11" target="_blank">
-          <i class="fab fa-weibo"></i>
-        </a>
+        
       
-    
-      
-        <a href="https://www.zhihu.com/people/womeimingzi" target="_blank">
-          <i class="fab fa-zhihu"></i>
-        </a>
-      
-    
-      
-    
+    </div>
+    <div class="site-description">
+      Why be a researcher if you can be an Engineer?
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://womeimingzi11.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
   </div>
 </div>
 
-        <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              关于
-            </h2>
-            <div class="post-info">
-              <span>
-                2019-01-25
-              </span>
-              <span>
-                2 min read
-              </span>
-              
-            </div>
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">关于</h2>
+            <div class="post-date">2019-01-25</div>
             
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <h2 id="博主是谁">博主是谁</h2>
+            <div class="post-content">
+              <h2 id="博主是谁">博主是谁</h2>
 <p>Hello, 我是洗衣机，为什么叫洗衣机？Long story，也许什么时候会讲给大家听吧（应该没人在乎其实～我洗衣机或者 Han 都可以！</p>
 <p>截止 2020 年 2 月 21 日，还是兰州大学生态学博士研究生在读，如果没什么意外这个状态大概还要持续一年吧。不经历延期的博士研究生不足以谈人生——阿 Q</p>
 <p>如果放在生态学博士研究生里面，大概是比较会写代码的；如果放在写代码爱好者里面，大概是比较会写公众号的；如果放在写公众号小编里面，大概是比较会作垃圾佬的；如果放在垃圾佬里面，大概是比较会生态学的。<strong>禁止套娃！</strong></p>
@@ -114,74 +107,37 @@
 <h2 id="联系我呀">联系我呀</h2>
 <p>首页就有不同社交网络的链接，不过如果你喜欢当然可以 <a href="mailto://chenhan28@gmail.com">Touch me via e-mail</a></p>
 
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">博主是谁</a></li>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">关于本站</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">联系我呀</a></li>
-</ul>
-</li>
-</ul>
-
-              </div>
             </div>
-          </article>
+            
+            
+
+            
+
+          </div>
+
         </div>
+      </div>
+    </div>
 
-        
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
-        
+<script type="application/javascript">
 
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
-  <a class="rss" href="https://womeimingzi11.github.io/atom.xml" target="_blank">RSS</a>
-</div>
+AOS.init();
 
-<script>
-  hljs.initHighlightingOnLoad()
+hljs.initHighlightingOnLoad()
 
-  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
-
-  // This should probably be throttled.
-  // Especially because it triggers during smooth scrolling.
-  // https://lodash.com/docs/4.17.10#throttle
-  // You could do like...
-  // window.addEventListener("scroll", () => {
-  //    _.throttle(doThatStuff, 100);
-  // });
-  // Only not doing it here to keep this Pen dependency-free.
-
-  window.addEventListener("scroll", event => {
-    let fromTop = window.scrollY;
-
-    mainNavLinks.forEach((link, index) => {
-      let section = document.getElementById(decodeURI(link.hash).substring(1));
-      let nextSection = null
-      if (mainNavLinks[index + 1]) {
-        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-      }
-      if (section.offsetTop <= fromTop) {
-        if (nextSection) {
-          if (nextSection.offsetTop > fromTop) {
-            link.classList.add("current");
-          } else {
-            link.classList.remove("current");    
-          }
-        } else {
-          link.classList.add("current");
-        }
-      } else {
-        link.classList.remove("current");
-      }
-    });
-  });
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
 
-      </div>
-    </div>
+
+
+
   </body>
 </html>
