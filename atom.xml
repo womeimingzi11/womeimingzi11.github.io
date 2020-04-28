@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://womeimingzi11.github.io</id>
     <title>洗衣机用户不会用洗衣机</title>
-    <updated>2020-04-28T09:15:42.029Z</updated>
+    <updated>2020-04-28T09:19:19.620Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://womeimingzi11.github.io"/>
     <link rel="self" href="https://womeimingzi11.github.io/atom.xml"/>
@@ -141,6 +141,9 @@ Number of permutations: 999
 envfit_to_df &lt;- function(env_obj,
                          r2_dig = 6,
                          p_dig = 3) {
+   # Define the output format of R2 and p value.
+   # Actually, only the R2 format is used in this case,
+   # p value format isn't used here.
   r2_fmt &lt;- as.character(paste('%.', r2_dig, 'f', sep = ''))
   p_fmt &lt;- as.character(paste('%.', p_dig, 'f', sep = ''))
   tibble(
