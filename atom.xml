@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://womeimingzi11.github.io</id>
     <title>洗衣机用户不会用洗衣机</title>
-    <updated>2020-04-28T09:12:13.615Z</updated>
+    <updated>2020-04-28T09:14:46.931Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://womeimingzi11.github.io"/>
     <link rel="self" href="https://womeimingzi11.github.io/atom.xml"/>
@@ -38,7 +38,7 @@
 </blockquote>
 <p>由于是进行了 999 次（默认参数可以修改）的蒙特卡洛抽样，因此这个结果是<strong>及其近似</strong>的结果，直接用作 RDA 中解释变量的显著性是没有问题的。然而，envfit 输出的结果并非标准的 data.frame 或者类似的结果，无法方便的输出或者进行分析，后续我们还会进行结果提取的步骤，暂且按下不表。</p>
 <h2 id="rda-和-envfit-分析">RDA 和 ENVFIT 分析</h2>
-<p>此例，我们使用随机抽取的 150 条土壤线虫群落群落数据以及对应的环境数据，由于不影响后续的理解以及版权考量，对各参数名不再解释。数据可以从此处下载。</p>
+<p>此例，我们使用随机抽取的 150 条土壤线虫群落群落数据以及对应的环境数据，由于不影响后续的理解以及版权考量，对各参数名不再解释。数据可以<a href="https://raw.githubusercontent.com/womeimingzi11/womeimingzi11.github.io/master/rda_data.zip">从此处</a>下载。</p>
 <p>每一步的操作以及原因以注释的形式呈现。</p>
 <pre><code class="language-R">library('tidyverse')
 
