@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://womeimingzi11.github.io</id>
     <title>洗衣机用户不会用洗衣机</title>
-    <updated>2020-04-17T12:30:57.269Z</updated>
+    <updated>2020-04-28T09:08:02.320Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://womeimingzi11.github.io"/>
     <link rel="self" href="https://womeimingzi11.github.io/atom.xml"/>
@@ -10,6 +10,214 @@
     <logo>https://womeimingzi11.github.io/images/avatar.png</logo>
     <icon>https://womeimingzi11.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 洗衣机用户不会用洗衣机</rights>
+    <entry>
+        <title type="html"><![CDATA[Using R for Everything: 使用 ggplot2 可视化 RDA 结果（I）数据分析与转换]]></title>
+        <id>https://womeimingzi11.github.io/post/vY312ek1B/</id>
+        <link href="https://womeimingzi11.github.io/post/vY312ek1B/">
+        </link>
+        <updated>2020-04-28T09:05:16.000Z</updated>
+        <content type="html"><![CDATA[<p>关于 RDA（Redundancy analysis 冗余分析）是什么，相信对于已经有可视化需求的同学来说已经不用更多的解释了。</p>
+<p>在 R 中常用来进行 RDA 分析和绘制工作的是 <a href="https://cran.r-project.org/web/packages/vegan/vegan.pdf">vegan</a> 和 <a href="https://github.com/gavinsimpson/ggvegan">ggvegan</a> 这两个包。然而，在实际使用中，最常遇到的问题是虽然这些包内建的 plot 等功能可以绘制出基本可用的包，但想要进一步的定制图形却没那么容易。</p>
+<p>想要绘制出一副自己满意、编辑满意、导师满意最主要的是审稿人满意的 RDA 结果，作为最强可视化工具之一的 <a href="https://ggplot2.tidyverse.org/">ggplot2</a> 包毋庸置疑是最佳的选择。</p>
+<h2 id="我们需要什么样的-rda-图">我们需要什么样的 RDA 图</h2>
+<p>首先，我们来思考我们需要什么样的 RDA 图？按照世纪需求以及审稿人的建议：</p>
+<blockquote>
+<p>I would recommend showing in bold the variables with significant correlations</p>
+</blockquote>
+<p>笔者最后的目标是绘制一幅：</p>
+<pre><code>1. 显示物种信息（实际上是响应变量矩阵）；
+2. 环境变量（实际上是解释变量矩阵）；
+3. 在两轴上能显示各自的解释度；
+4. 标记有显著性的解释变量。
+</code></pre>
+<p>以笔者对 plot.rda 以及 autoplot.rda 这两个 vegan 和 ggvegan 内建函数的浅薄了解，似乎很难完成。</p>
+<h3 id="如何标记有显著性的解释变量">如何「标记有显著性的解释变量」？</h3>
+<p>如果进行过 RDA 分析不难发现，使用 vegan 内建的 rda 是没有标记解释变量的显著性的。其实这种显著性需要 vegan 内建的 envfit 函数来得到一个及其近似的结果。通常这个方法在论文中会写作：</p>
+<blockquote>
+<p>Monte Carlo permutation (999 permutations) was used to identify axes with significant eigenvalues and species-environment correlations.</p>
+</blockquote>
+<p>由于是进行了 999 次（默认参数可以修改）的蒙特卡洛抽样，因此这个结果是<strong>及其近似</strong>的结果，直接用作 RDA 中解释变量的显著性是没有问题的。然而，envfit 输出的结果并非标准的 data.frame 或者类似的结果，无法方便的输出或者进行分析，后续我们还会进行结果提取的步骤，暂且按下不表。</p>
+<h2 id="rda-和-envfit-分析">RDA 和 ENVFIT 分析</h2>
+<p>此例，我们使用随机抽取的 150 条土壤线虫群落群落数据以及对应的环境数据，由于不影响后续的理解以及版权考量，对各参数名不再解释。</p>
+<p>每一步的操作以及原因以注释的形式呈现。</p>
+<pre><code class="language-R">library('tidyverse')
+
+# read Environmental Variables
+df_env &lt;- read_csv('df_env_smp.csv')
+# read Community composition matrix
+df_com &lt;- read_csv('df_com_smp.csv')
+
+# View the structure of data
+head(df_env)
+head(df_com)
+</code></pre>
+<pre><code>Parsed with column specification:
+cols(
+  pH = [32mcol_double()[39m,
+  MOI = [32mcol_double()[39m,
+  TN = [32mcol_double()[39m,
+  TP = [32mcol_double()[39m,
+  AP = [32mcol_double()[39m,
+  NH4 = [32mcol_double()[39m,
+  NO3 = [32mcol_double()[39m,
+  SOC = [32mcol_double()[39m,
+  MAT = [32mcol_double()[39m,
+  MAP = [32mcol_double()[39m,
+  PBM = [32mcol_double()[39m,
+  PCV = [32mcol_double()[39m,
+  PSR = [32mcol_double()[39m
+)
+
+Parsed with column specification:
+cols(
+  pp = [32mcol_double()[39m,
+  ba = [32mcol_double()[39m,
+  fu = [32mcol_double()[39m,
+  pr = [32mcol_double()[39m,
+  om = [32mcol_double()[39m
+)
+</code></pre>
+<table>
+<caption>A tibble: 6 × 13</caption>
+<thead>
+	<tr><th scope=col>pH</th><th scope=col>MOI</th><th scope=col>TN</th><th scope=col>TP</th><th scope=col>AP</th><th scope=col>NH4</th><th scope=col>NO3</th><th scope=col>SOC</th><th scope=col>MAT</th><th scope=col>MAP</th><th scope=col>PBM</th><th scope=col>PCV</th><th scope=col>PSR</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>-1.6396547</td><td>-0.1610384</td><td>-0.1162406</td><td>-0.44892589</td><td> 0.17966965</td><td> 0.4471754</td><td>-0.5148515</td><td>-0.292278803</td><td> 0.8420221</td><td> 0.02487222</td><td> 0.17638650</td><td> 0.426595458</td><td> 0.2275781</td></tr>
+	<tr><td> 0.9429126</td><td>-0.5549069</td><td>-0.7919730</td><td> 0.02952209</td><td>-0.78701735</td><td>-0.3426843</td><td>-0.4197756</td><td>-0.697789311</td><td>-1.5519670</td><td> 0.27013035</td><td>-0.02465146</td><td> 0.008333099</td><td>-0.8352947</td></tr>
+	<tr><td>-1.3387571</td><td>-0.2762522</td><td> 0.1998817</td><td>-0.14900328</td><td>-0.10273314</td><td> 0.7179844</td><td>-0.4922144</td><td> 0.461059956</td><td>-0.8480169</td><td> 1.21243154</td><td> 0.73829039</td><td>-0.793336422</td><td> 0.8349340</td></tr>
+	<tr><td>-1.2035947</td><td>-0.1658411</td><td>-0.2600847</td><td>-0.45606691</td><td> 0.09277663</td><td>-0.1328073</td><td>-0.1677489</td><td>-0.007572046</td><td> 0.7833595</td><td>-0.87351309</td><td>-0.80968336</td><td>-0.514494850</td><td>-1.2908116</td></tr>
+	<tr><td>-1.1762407</td><td> 1.0043821</td><td> 0.2918750</td><td>-0.47748995</td><td> 2.24338416</td><td> 0.7924569</td><td>-0.5827629</td><td> 0.035809220</td><td>-0.2893264</td><td>-0.22471654</td><td> 0.12645186</td><td> 0.182609082</td><td> 0.9867730</td></tr>
+	<tr><td> 0.4263991</td><td> 0.5467350</td><td>-0.3570957</td><td>-0.12043922</td><td> 0.54896611</td><td>-0.3652517</td><td>-0.5540892</td><td>-0.360483891</td><td>-0.8480169</td><td> 1.21243154</td><td> 2.11789718</td><td>-0.026522097</td><td> 0.6830950</td></tr>
+</tbody>
+</table>
+<table>
+<caption>A tibble: 6 × 5</caption>
+<thead>
+	<tr><th scope=col>pp</th><th scope=col>ba</th><th scope=col>fu</th><th scope=col>pr</th><th scope=col>om</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>  2.550000</td><td>28.010000</td><td> 2.550000</td><td>2.550000</td><td>15.280000</td></tr>
+	<tr><td>  1.311046</td><td> 7.316707</td><td> 1.337884</td><td>1.337884</td><td> 5.953381</td></tr>
+	<tr><td>  8.250000</td><td>13.255000</td><td> 3.355000</td><td>0.000000</td><td>14.850000</td></tr>
+	<tr><td>102.490000</td><td>18.516667</td><td>20.946667</td><td>0.000000</td><td>23.500000</td></tr>
+	<tr><td> 21.350000</td><td>52.720000</td><td>14.846667</td><td>0.000000</td><td> 5.623333</td></tr>
+	<tr><td>  2.490000</td><td> 4.965000</td><td> 1.245000</td><td>0.000000</td><td> 2.475000</td></tr>
+</tbody>
+</table>
+<pre><code class="language-R">library('vegan')
+
+# Performing RDA and viewing the results
+res_rda &lt;- rda(df_com, df_env)
+res_rda
+
+# Performing ENVFIT
+res_envfit &lt;- envfit(df_com, df_env)
+
+# However, the result of ENVFIT is not in the data.frame format, we should extract useful information from it.
+res_envfit
+</code></pre>
+<pre><code>Call: rda(X = df_com, Y = df_env)
+
+                Inertia Proportion Rank
+Total         2031.7341     1.0000     
+Constrained    895.7317     0.4409    5
+Unconstrained 1136.0024     0.5591    5
+Inertia is variance 
+
+Eigenvalues for constrained axes:
+ RDA1  RDA2  RDA3  RDA4  RDA5 
+754.0  88.3  45.4   6.2   1.8 
+
+Eigenvalues for unconstrained axes:
+  PC1   PC2   PC3   PC4   PC5 
+747.4 235.0  96.3  44.7  12.6 
+
+
+
+
+
+***VECTORS
+
+          pp       ba     r2 Pr(&gt;r)    
+pH  -0.94935  0.31421 0.0809  0.002 ** 
+MOI  0.79143  0.61126 0.2636  0.001 ***
+TN   0.91399  0.40574 0.0887  0.004 ** 
+TP   0.86358 -0.50421 0.0002  0.984    
+AP   0.99269  0.12071 0.0575  0.025 *  
+NH4  0.94495 -0.32722 0.0462  0.036 *  
+NO3  0.52786  0.84933 0.1430  0.001 ***
+SOC  0.81629  0.57764 0.1440  0.001 ***
+MAT  0.10537 -0.99443 0.0118  0.421    
+MAP -0.18615 -0.98252 0.0073  0.572    
+PBM  0.75360  0.65733 0.0096  0.488    
+PCV  0.57508  0.81810 0.0380  0.058 .  
+PSR  0.88521 -0.46519 0.0062  0.616    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Permutation: free
+Number of permutations: 999
+</code></pre>
+<p>正如我们在注释提到的，ENVFIT 并不是以 data.frame 的形式提供数据，因此我们还需要通过一些提取的操作才能获得与结果相同的表格。由于这类操作经常使用，因此我们将其包装成 function 并命名为 envfit_to_df</p>
+<pre><code class="language-R"># Here, env_obj indicates the result of envfit. In this case, it's the res_envfit.
+# r2_dig is the significant figure of R2
+# p_dig is the significant figure of p value
+envfit_to_df &lt;- function(env_obj,
+                         r2_dig = 6,
+                         p_dig = 3) {
+  r2_fmt &lt;- as.character(paste('%.', r2_dig, 'f', sep = ''))
+  p_fmt &lt;- as.character(paste('%.', p_dig, 'f', sep = ''))
+  tibble(
+      # the name of explainary variables
+    factor = names(env_obj$vectors$r),
+      # list or vector of R2
+    r2 = env_obj$vectors$r,
+      # list or vector of p values
+    pvals = env_obj$vectors$pvals
+  ) %&gt;%
+    # generate significant levels by p values
+    mutate(sig = case_when(
+      pvals &lt;= 0.001 ~ '***',
+      pvals &lt;= 0.01 ~ '**',
+      pvals &lt;= 0.05 ~ '*',
+      TRUE ~ ' '
+    )) %&gt;%
+    # format the significant figure by format definition before.
+    mutate(pvals = sprintf('%.3f', pvals),
+           r2 = sprintf(r2_fmt, r2))
+}
+# Convert result of ENVFIT to data.frame, in fact, it's a tibble.
+df_env &lt;- envfit_to_df(res_envfit, r2_dig = 3)
+df_env
+</code></pre>
+<table>
+<caption>A tibble: 13 × 4</caption>
+<thead>
+	<tr><th scope=col>factor</th><th scope=col>r2</th><th scope=col>pvals</th><th scope=col>sig</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>pH </td><td>0.081</td><td>0.002</td><td>** </td></tr>
+	<tr><td>MOI</td><td>0.264</td><td>0.001</td><td>***</td></tr>
+	<tr><td>TN </td><td>0.089</td><td>0.004</td><td>** </td></tr>
+	<tr><td>TP </td><td>0.000</td><td>0.984</td><td>   </td></tr>
+	<tr><td>AP </td><td>0.058</td><td>0.025</td><td>*  </td></tr>
+	<tr><td>NH4</td><td>0.046</td><td>0.036</td><td>*  </td></tr>
+	<tr><td>NO3</td><td>0.143</td><td>0.001</td><td>***</td></tr>
+	<tr><td>SOC</td><td>0.144</td><td>0.001</td><td>***</td></tr>
+	<tr><td>MAT</td><td>0.012</td><td>0.421</td><td>   </td></tr>
+	<tr><td>MAP</td><td>0.007</td><td>0.572</td><td>   </td></tr>
+	<tr><td>PBM</td><td>0.010</td><td>0.488</td><td>   </td></tr>
+	<tr><td>PCV</td><td>0.038</td><td>0.058</td><td>   </td></tr>
+	<tr><td>PSR</td><td>0.006</td><td>0.616</td><td>   </td></tr>
+</tbody>
+</table>
+<p>截止到目前，我们已经准备完成了 RDA 分析以及 ENVFIT 分析，并将数据转换成为了满足可视化需求的格式。</p>
+<p>最后的可视化会在下一片文章中完成。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[设备管理器中的 MVSI Card Reader USB Device driver 是什么？如何移除其占用盘符？]]></title>
         <id>https://womeimingzi11.github.io/post/she-bei-guan-li-qi-zhong-de-mvsi-card-reader-usb-device-driver-shi-shi-me-ru-he-yi-chu-qi-zhan-yong-pan-fu/</id>
