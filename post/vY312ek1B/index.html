@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Using R for Everything: 使用 ggplot2 可视化 RDA 结果（I）数据分析与转换 | 洗衣机用户不会用洗衣机</title>
+<title>Using R for Everything: 使用 ggplot2 可视化 RDA 结果 | 洗衣机用户不会用洗衣机</title>
 <meta name="description" content="Why be a researcher if you can be an Engineer?">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico?v=1588065551698">
+<link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico?v=1588228155609">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://womeimingzi11.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://womeimingzi11.github.io">
-        <img src="https://womeimingzi11.github.io/images/avatar.png?v=1588065551698" class="site-logo">
+        <img src="https://womeimingzi11.github.io/images/avatar.png?v=1588228155609" class="site-logo">
         <h1 class="site-title">洗衣机用户不会用洗衣机</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -92,11 +92,15 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">Using R for Everything: 使用 ggplot2 可视化 RDA 结果（I）数据分析与转换</h2>
+            <h2 class="post-title">Using R for Everything: 使用 ggplot2 可视化 RDA 结果</h2>
             <div class="post-date">2020-04-28</div>
             
+              <div class="feature-container" style="background-image: url('https://womeimingzi11.github.io/post-images/vY312ek1B.png')">
+              </div>
+            
             <div class="post-content">
-              <p>关于 RDA（Redundancy analysis 冗余分析）是什么，相信对于已经有可视化需求的同学来说已经不用更多的解释了。</p>
+              <h1 id="using-r-for-everything-ggplot2-可视化-rda-结果">Using R for Everything: ggplot2 可视化 RDA 结果</h1>
+<p>关于 RDA（Redundancy analysis 冗余分析）是什么，相信对于已经有可视化需求的同学来说已经不用更多的解释了。</p>
 <p>在 R 中常用来进行 RDA 分析和绘制工作的是 <a href="https://cran.r-project.org/web/packages/vegan/vegan.pdf">vegan</a> 和 <a href="https://github.com/gavinsimpson/ggvegan">ggvegan</a> 这两个包。然而，在实际使用中，最常遇到的问题是虽然这些包内建的 plot 等功能可以绘制出基本可用的包，但想要进一步的定制图形却没那么容易。</p>
 <p>想要绘制出一副自己满意、编辑满意、导师满意最主要的是审稿人满意的 RDA 结果，作为最强可视化工具之一的 <a href="https://ggplot2.tidyverse.org/">ggplot2</a> 包毋庸置疑是最佳的选择。</p>
 <h2 id="我们需要什么样的-rda-图">我们需要什么样的 RDA 图</h2>
@@ -118,7 +122,7 @@
 </blockquote>
 <p>由于是进行了 999 次（默认参数可以修改）的蒙特卡洛抽样，因此这个结果是<strong>及其近似</strong>的结果，直接用作 RDA 中解释变量的显著性是没有问题的。然而，envfit 输出的结果并非标准的 data.frame 或者类似的结果，无法方便的输出或者进行分析，后续我们还会进行结果提取的步骤，暂且按下不表。</p>
 <h2 id="rda-和-envfit-分析">RDA 和 ENVFIT 分析</h2>
-<p>此例，我们使用随机抽取的 150 条土壤线虫群落群落数据以及对应的环境数据，由于不影响后续的理解以及版权考量，对各参数名不再解释。数据可以<a href="https://raw.githubusercontent.com/womeimingzi11/womeimingzi11.github.io/master/rda_data.zip">从此处</a>下载。</p>
+<p>此例，我们使用随机抽取的 150 条土壤线虫群落群落数据以及对应的环境数据，由于不影响后续的理解以及版权考量，对各参数名不再解释。</p>
 <p>每一步的操作以及原因以注释的形式呈现。</p>
 <pre><code class="language-R">library('tidyverse')
 
@@ -130,6 +134,32 @@ df_com &lt;- read_csv('df_com_smp.csv')
 # View the structure of data
 head(df_env)
 head(df_com)
+</code></pre>
+<pre><code>Parsed with column specification:
+cols(
+  pH = [32mcol_double()[39m,
+  MOI = [32mcol_double()[39m,
+  TN = [32mcol_double()[39m,
+  TP = [32mcol_double()[39m,
+  AP = [32mcol_double()[39m,
+  NH4 = [32mcol_double()[39m,
+  NO3 = [32mcol_double()[39m,
+  SOC = [32mcol_double()[39m,
+  MAT = [32mcol_double()[39m,
+  MAP = [32mcol_double()[39m,
+  PBM = [32mcol_double()[39m,
+  PCV = [32mcol_double()[39m,
+  PSR = [32mcol_double()[39m
+)
+
+Parsed with column specification:
+cols(
+  pp = [32mcol_double()[39m,
+  ba = [32mcol_double()[39m,
+  fu = [32mcol_double()[39m,
+  pr = [32mcol_double()[39m,
+  om = [32mcol_double()[39m
+)
 </code></pre>
 <table>
 <caption>A tibble: 6 × 13</caption>
@@ -196,19 +226,19 @@ Eigenvalues for unconstrained axes:
 ***VECTORS
 
           pp       ba     r2 Pr(&gt;r)    
-pH  -0.94935  0.31421 0.0809  0.002 ** 
+pH  -0.94935  0.31421 0.0809  0.003 ** 
 MOI  0.79143  0.61126 0.2636  0.001 ***
 TN   0.91399  0.40574 0.0887  0.004 ** 
 TP   0.86358 -0.50421 0.0002  0.984    
-AP   0.99269  0.12071 0.0575  0.025 *  
-NH4  0.94495 -0.32722 0.0462  0.036 *  
-NO3  0.52786  0.84933 0.1430  0.001 ***
+AP   0.99269  0.12071 0.0575  0.026 *  
+NH4  0.94495 -0.32722 0.0462  0.033 *  
+NO3  0.52786  0.84933 0.1430  0.002 ** 
 SOC  0.81629  0.57764 0.1440  0.001 ***
-MAT  0.10537 -0.99443 0.0118  0.421    
-MAP -0.18615 -0.98252 0.0073  0.572    
-PBM  0.75360  0.65733 0.0096  0.488    
-PCV  0.57508  0.81810 0.0380  0.058 .  
-PSR  0.88521 -0.46519 0.0062  0.616    
+MAT  0.10537 -0.99443 0.0118  0.405    
+MAP -0.18615 -0.98252 0.0073  0.579    
+PBM  0.75360  0.65733 0.0096  0.508    
+PCV  0.57508  0.81810 0.0380  0.072 .  
+PSR  0.88521 -0.46519 0.0062  0.639    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 Permutation: free
@@ -221,9 +251,6 @@ Number of permutations: 999
 envfit_to_df &lt;- function(env_obj,
                          r2_dig = 6,
                          p_dig = 3) {
-   # Define the output format of R2 and p value.
-   # Actually, only the R2 format is used in this case,
-   # p value format isn't used here.
   r2_fmt &lt;- as.character(paste('%.', r2_dig, 'f', sep = ''))
   p_fmt &lt;- as.character(paste('%.', p_dig, 'f', sep = ''))
   tibble(
@@ -256,23 +283,135 @@ df_env
 	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>pH </td><td>0.081</td><td>0.002</td><td>** </td></tr>
+	<tr><td>pH </td><td>0.081</td><td>0.003</td><td>** </td></tr>
 	<tr><td>MOI</td><td>0.264</td><td>0.001</td><td>***</td></tr>
 	<tr><td>TN </td><td>0.089</td><td>0.004</td><td>** </td></tr>
 	<tr><td>TP </td><td>0.000</td><td>0.984</td><td>   </td></tr>
-	<tr><td>AP </td><td>0.058</td><td>0.025</td><td>*  </td></tr>
-	<tr><td>NH4</td><td>0.046</td><td>0.036</td><td>*  </td></tr>
-	<tr><td>NO3</td><td>0.143</td><td>0.001</td><td>***</td></tr>
+	<tr><td>AP </td><td>0.058</td><td>0.026</td><td>*  </td></tr>
+	<tr><td>NH4</td><td>0.046</td><td>0.033</td><td>*  </td></tr>
+	<tr><td>NO3</td><td>0.143</td><td>0.002</td><td>** </td></tr>
 	<tr><td>SOC</td><td>0.144</td><td>0.001</td><td>***</td></tr>
-	<tr><td>MAT</td><td>0.012</td><td>0.421</td><td>   </td></tr>
-	<tr><td>MAP</td><td>0.007</td><td>0.572</td><td>   </td></tr>
-	<tr><td>PBM</td><td>0.010</td><td>0.488</td><td>   </td></tr>
-	<tr><td>PCV</td><td>0.038</td><td>0.058</td><td>   </td></tr>
-	<tr><td>PSR</td><td>0.006</td><td>0.616</td><td>   </td></tr>
+	<tr><td>MAT</td><td>0.012</td><td>0.405</td><td>   </td></tr>
+	<tr><td>MAP</td><td>0.007</td><td>0.579</td><td>   </td></tr>
+	<tr><td>PBM</td><td>0.010</td><td>0.508</td><td>   </td></tr>
+	<tr><td>PCV</td><td>0.038</td><td>0.072</td><td>   </td></tr>
+	<tr><td>PSR</td><td>0.006</td><td>0.639</td><td>   </td></tr>
 </tbody>
 </table>
 <p>截止到目前，我们已经准备完成了 RDA 分析以及 ENVFIT 分析，并将数据转换成为了满足可视化需求的格式。</p>
-<p>最后的可视化会在下一片文章中完成。</p>
+<p>接下来就是需要进行可视化作业。此例，笔者仅需要显示环境变量与物种信息，不需要显示样地信息，因此绘制中仅保留了所需的信息，如需显示样地信息，请按实际需求更改。</p>
+<p>绘制 RDA 图形是常用的操作，因此同样将它包装成为 function 并命名为 <code>ggRDA</code></p>
+<pre><code class="language-R"># Here, rda_obj means the object which is from vegan::rda
+# sp_size means the text size of species
+# arrow_txt_size means the environmet variable names at the end of the arrow
+# Because not every RDA plot needs indicate significant correlations, the envfit_df is optional here.
+ggRDA &lt;- function(rda_obj,sp_size = 4,arrow_txt_size = 4, envfit_df) {
+    # ggplot doesn't support rda object directly, we use ggvegan::fortify function to convert the rda to data.frame
+    fmod &lt;- fortify(rda_obj)
+    # to get the arrow of biplot, we plot rda by vegan::plot.rda function firstly. 
+    # The arrow attributes contain in the attributes(plot_obejct$biplot)$arrow.mul
+    basplot &lt;- plot(rda_obj)
+    mult &lt;- attributes(basplot$biplot)$arrow.mul
+  
+    # To check if envfit_df exists or not
+    # If envfit_df exists, join the fortified rda_obj and envfit to mark which variable is significant.
+    if(missingArg(envfit_df)){
+        bplt_df &lt;- filter(fmod, Score == &quot;biplot&quot;) %&gt;%
+        # If there is no requirement to mark significant variable
+        # use the sytle of sinificant (black bolder solid arrow)
+        # to paint the arrow
+        mutate(bold = 'sig')
+    } else {
+        bplt_df &lt;- filter(fmod, Score == &quot;biplot&quot;) %&gt;%
+        left_join(envfit_df, by = c('Label' = 'factor')) %&gt;%
+        # To mark the significant variables as sig, not significant variables as ns
+        # these information are stored in bold column
+        mutate(bold = ifelse(str_detect(sig, fixed('*')), 'sig', 'ns'))
+    }
+  ggplot(fmod, aes(x = RDA1, y = RDA2)) +
+    coord_fixed() +
+    geom_segment(data = bplt_df,
+                 # mult and RDA1/RDA2 are from fortified RDA data.frame
+                 # they contain the direction and effects of every variabl
+                 # their products are the direction and length of arrows
+                 aes(x = 0, xend = mult * RDA1,
+                     y = 0, yend = mult * RDA2,
+                     # Use different arrow size to indicate the significant level
+                     size = bold,
+                     # Use different arrow color to indicate the significant level
+                     color = bold,
+                     # Use different arrow linetype to indicate the significant level
+                     linetype = bold),
+                 #############################
+                 # Q:Why use three different attibution to control the significant levels?
+                     # It is redundancy, isn't it?
+                 # A: In fact, it's not easy to recongize the significant level by one kind attribution
+                     # Becasue it is not delicate to indicate it with supper bold and supper thin arrow,
+                     # by the same logic, high contrast colors are not delicate neither.
+                     # As for the line type, some arrow are really short, it's not easy to recognize
+                     # weather it is solid or dashed line at all.
+                     # To sum up, we use three different attributions
+                     # to indicate the same difference to avoid any misleading.
+                 #############################
+                 # to control the size of the header of arrow
+                 arrow = arrow(length = unit(0.25, &quot;cm&quot;)), 
+                ) +
+    # Add the text of variable name at the end of arrow
+    geom_text(data =  subset(fmod, Score == &quot;biplot&quot;),
+              aes(x = (mult + mult/10) * RDA1,
+                   #we add 10% to the text to push it slightly out from arrows
+                  y = (mult + mult/10) * RDA2,
+                  label = Label),
+              size = arrow_txt_size,
+               #otherwise you could use hjust and vjust. I prefer this option
+              hjust = 0.5) +
+    # Add the text of species
+    geom_text(
+      data = subset(fmod, Score == &quot;species&quot;),
+      aes(colour = &quot;species&quot;,label = Label),
+      size = sp_size
+    )
+}
+</code></pre>
+<p>虽然使用 ggRDA 可以直接绘制图形，但通常为了美观，对于特定的参数还需要进一步的调整。</p>
+<p>注意，由于在 ggRDA 中使用了 vegan::plot.rda 绘制图像，所以在下面的调用 ggRDA 会首先绘制一次简易的 rda 图像之后，再显示出 ggplot2 绘制的图形，不影响后续的输出保存。</p>
+<pre><code class="language-R">library(ggvegan)
+# Get the amount of explanation by each axis
+# gernerally, we choose the first two axes.
+exp_by_x &lt;- (as.list(res_rda$CCA$eig)$RDA1)/(res_rda$tot.chi) * 100
+exp_by_y &lt;- (as.list(res_rda$CCA$eig)$RDA2)/(res_rda$tot.chi) * 100
+    
+ggRDA(res_rda, envfit_df = df_env, sp_size = 5) +
+    # Generally theme_classic is a good choice to paint a figure
+    theme_classic() +
+    # In general, we don't need to show the legend in RDA figure
+    theme(legend.position = &quot;none&quot;) +
+    xlab(paste('RDA1 (', round(exp_by_x, 2), '%)', sep = '')) +
+    ylab(paste('RDA2 (', round(exp_by_y, 2), '%)', sep = '')) +
+    # scale_XXXXX_manual series provide the ability
+    # to define the style of legend by variable value
+    scale_size_manual(values = c('ns' = .6,
+                                 'sig' = .8)) +
+    # Q: What's species here? I don't remember their is a significant level which is called 'species'
+    # A: Indeed, their is no significant 'species'. However, 
+        # the species name in RDA which is generated from geom_text contains colour attribution.
+    scale_colour_manual(values = c(
+        'ns' = '#606060',
+        'sig' = 'black',
+        'species' = 'red'
+      )) +
+    scale_linetype_manual(values = c('ns' = 8, 'sig' = 1))
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://picgo-1256649726.cos.ap-chengdu.myqcloud.com/output_8_1.png" alt="" loading="lazy"></figure>
+<p>最后很简单了，使用 ggsave 将 RDA 图保存成你需要的格式就可以。</p>
+<p>Tips: 自然科学期刊的投稿系统通常支持上传 PDF 格式的图片，根据实际情况也推荐使用 ggsave 输出 PDF 格式。</p>
+<p>此时无需设置 DPI 也无法设置 DPI，这是因为，ggsave 保存的 PDF 文件会优先将图片输出为矢量图，简而言之就是图片无论如何放大，都不会变得模糊，而期刊的排版系统也能很好的处理这种矢量图。</p>
+<p>只要给 PDF 图片设定一个合适的宽高，就无需担心图片会变得不清晰等奇奇怪怪看似玄学的问题了。</p>
+<p>不过如果有修改字体的需求，也许 PDF 会报错，类似于字体无法嵌入，此时输出的 PDF 文件所有的文字都会消失。关于解决这个问题，后续也许会进行进一步的讨论。</p>
+<pre><code class="language-R">ggsave('RDA.pdf',width = 7)
+</code></pre>
+<pre><code>Saving 7 x 7 in image
+</code></pre>
 
             </div>
             
