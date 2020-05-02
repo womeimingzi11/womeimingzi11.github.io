@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico?v=1588228155609">
+<link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico?v=1588409364670">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://womeimingzi11.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://womeimingzi11.github.io">
-        <img src="https://womeimingzi11.github.io/images/avatar.png?v=1588228155609" class="site-logo">
+        <img src="https://womeimingzi11.github.io/images/avatar.png?v=1588409364670" class="site-logo">
         <h1 class="site-title">洗衣机用户不会用洗衣机</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -235,8 +235,7 @@ bg_rst_df &lt;- as.data.frame(bg_rst, xy = TRUE) %&gt;% mutate(alpha = rescale(l
 # of Topographic figure, it will be dizzy, and for color Topographic figure
 # please don't use the greyscale and color for the evelation simultaneously. Just
 # use alpha to control the shape of regional shpae.
-tp_rst_df &lt;- as.data.frame(tp_rst, xy = TRUE) %&gt;% mutate(alpha = ifelse(is.na(layer), 
-    0, 1))
+tp_rst_df &lt;- as.data.frame(tp_rst, xy = TRUE) %&gt;% na.omit()
 </code></pre>
 <p>当数据准备完毕，我们就开始图形的绘制。首先进行地形图叠加到背景地形的绘制。因为命令较多，并且均以注释的形式标注到代码中，故此不再提前讲解。</p>
 <pre><code class="language-r"># sacle_parm as a parameter controls the sclae of the hole figure, it will be
@@ -244,24 +243,32 @@ tp_rst_df &lt;- as.data.frame(tp_rst, xy = TRUE) %&gt;% mutate(alpha = ifelse(is
 # figure.
 scale_parm &lt;- 2
 # Init ggplot
-gmap &lt;- ggplot() + # plot the backgroun layer, set the alpha without color will make a grey
+# plot the backgroun layer, set the alpha without color will make a grey
 # background
-geom_raster(data = bg_rst_df, aes(x = x, y = y, alpha = alpha)) + # plot the topographic layer, set alpha to keep the shape of Tibetan Plateau
+gmap &lt;- ggplot() + 
+# plot the topographic layer, set alpha to keep the shape of Tibetan Plateau
 # (TP). Color indicates the elevation.
-geom_raster(data = tp_rst_df, aes(x = x, y = y, fill = layer, alpha = alpha)) + # terrain.colors is an built-in function to generate a list of color palettes.
+geom_raster(data = bg_rst_df, aes(x = x, y = y, alpha = alpha)) + 
+ # terrain.colors is an built-in function to generate a list of color palettes.
 # set the legend title of evelation by name parameter.
-scale_fill_gradientn(colours = terrain.colors(100), name = &quot;Elevation (m)&quot;) + # As we said before, the alphas is used to determine the shpae of TP, we don't
+geom_raster(data = tp_rst_df, aes(x = x, y = y, fill = layer, alpha = alpha)) +
+ # As we said before, the alphas is used to determine the shpae of TP, we don't
 # need to show them as legends.
-scale_alpha(guide = &quot;none&quot;) + # Project this figure as a map but not a normal figure
-coord_quickmap() + # Set preset theme makes things easire
-theme_minimal() + # Set the limititions of axes. `expand` parameter will remove the gaps between
-# the rectangle map and axes.  If you are not sure what's this mean, remove the
-# parameter by yourself and you will find it out.
+scale_fill_gradientn(colours = terrain.colors(100), name = &quot;Elevation (m)&quot;) +
+ # Project this figure as a map but not a normal figure
+scale_alpha(guide = &quot;none&quot;) +
+ # Set preset theme makes things easire
+coord_quickmap() +
+ # Set the limititions of axes. `expand` parameter will remove the gaps between
+theme_minimal() +
+ # Set the titles of axis
 scale_x_continuous(limits = c(70, 105), expand = c(0, 0)) + scale_y_continuous(limits = c(25, 
-    45), expand = c(0, 0)) + # Set the titles of axis
-labs(x = &quot;Longtitude (E)&quot;, y = &quot;Laitude (N)&quot;) + # remove the background color and background grid, you know the classical
+    45), expand = c(0, 0)) +
+labs(x = &quot;Longtitude (E)&quot;, y = &quot;Laitude (N)&quot;) +
+ # remove the background color and background grid, you know the classical
 # ggplot's grid, don't you?
-theme(panel.grid = element_blank(), panel.background = element_blank()) + # Set the size of axis and legend
+theme(panel.grid = element_blank(), panel.background = element_blank()) + 
+# Set the size of axis and legend
 theme(axis.title = element_text(size = 7 * scale_parm), axis.text = element_text(size = 6 * 
     scale_parm)) + theme(legend.key.width = unit(0.2 * scale_parm, &quot;cm&quot;), legend.key.height = unit(0.5 * 
     scale_parm, &quot;cm&quot;), legend.text = element_text(size = 5 * scale_parm), legend.title = element_text(size = 6 * 
