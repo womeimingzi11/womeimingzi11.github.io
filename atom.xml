@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://womeimingzi11.github.io</id>
     <title>洗衣机用户不会用洗衣机</title>
-    <updated>2020-06-09T08:28:12.093Z</updated>
+    <updated>2020-06-09T10:53:54.944Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://womeimingzi11.github.io"/>
     <link rel="self" href="https://womeimingzi11.github.io/atom.xml"/>
@@ -11,7 +11,7 @@
     <icon>https://womeimingzi11.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 洗衣机用户不会用洗衣机</rights>
     <entry>
-        <title type="html"><![CDATA[Shiny apps: 使用 moreThanANOVA 进行「正确」显著性检验]]></title>
+        <title type="html"><![CDATA[Shiny apps: 使用 moreThanANOVA 进行「正确」的显著性检验]]></title>
         <id>https://womeimingzi11.github.io/post/YdOGNuodh/</id>
         <link href="https://womeimingzi11.github.io/post/YdOGNuodh/">
         </link>
@@ -65,8 +65,8 @@
 使用 PDF 可以输出矢量图，能够有效避免 DPI 造成的清晰度问题，同时拥有极小的体积以及不错的兼容性。</p>
 <figure data-type="image" tabindex="5"><img src="https://picgo-1256649726.cos.ap-chengdu.myqcloud.com/post_hoc_figure.png" alt="" loading="lazy"></figure>
 <p>目前 moreThanANOVA 托管于 Rstudio 旗下 Shinyapps.io 网站，源代码托管于 <a href="https://github.com/womeimingzi11/moreThanANOVA">GitHub</a>。服务运行过程中不会永久保存用户数据，数据有效期仅保留至网页关闭前。</p>
-<p>同时如果对于数据高度敏感，也可以考虑将<a href="https://github.com/womeimingzi11/moreThanANOVA">源代码</a> fork 至个人 repo 或下载至本地后，手动运行 app.R 在本地电脑执行操作。</p>
-<p>如有任何使用中的疑问、功能上的建议与意见，欢迎与我联系。</p>
+<p>同时如果对于数据高度敏感，也可以考虑将<a href="https://github.com/womeimingzi11/moreThanANOVA/fork/"> fork 项目</a> 或下载至本地后，手动运行 app.R 在本地电脑执行操作。</p>
+<p>如有任何使用中的疑问、功能上的建议与意见，欢迎与<a href="mailto://chenhan28@gmail.com">我联系</a>。当然也欢迎 <a href="https://github.com/womeimingzi11/moreThanANOVA/star/">Star</a> 以及进行任何提交。</p>
 ]]></content>
     </entry>
     <entry>
