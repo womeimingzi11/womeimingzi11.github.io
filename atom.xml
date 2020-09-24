@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://womeimingzi11.github.io</id>
     <title>洗衣机用户不会用洗衣机</title>
-    <updated>2020-09-24T21:06:11.648Z</updated>
+    <updated>2020-09-24T21:15:52.407Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://womeimingzi11.github.io"/>
     <link rel="self" href="https://womeimingzi11.github.io/atom.xml"/>
@@ -11,7 +11,7 @@
     <icon>https://womeimingzi11.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 洗衣机用户不会用洗衣机</rights>
     <entry>
-        <title type="html"><![CDATA[Using R for Everything 番外: 包开发 vignette/test 中 token 的处理]]></title>
+        <title type="html"><![CDATA[R for Everything 番外: 包开发 vignette/test 中 token 的处理]]></title>
         <id>https://womeimingzi11.github.io/post/mEmVc9Hsx/</id>
         <link href="https://womeimingzi11.github.io/post/mEmVc9Hsx/">
         </link>
@@ -147,7 +147,7 @@ knitr::opts_chunk$set(purl = NOT_CRAN)
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Using R for everything: 方差分解（Variation partition）变量筛选与显著性标注]]></title>
+        <title type="html"><![CDATA[R for everything: 方差分解（Variation partition）变量筛选与显著性标注]]></title>
         <id>https://womeimingzi11.github.io/post/HpSw5NiHj/</id>
         <link href="https://womeimingzi11.github.io/post/HpSw5NiHj/">
         </link>
@@ -374,7 +374,7 @@ anova(rda(formula_clim, data = df_env))
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Using R for Everything: 使用 ggplot2 可视化 RDA 结果]]></title>
+        <title type="html"><![CDATA[R for Everything: 使用 ggplot2 可视化 RDA 结果]]></title>
         <id>https://womeimingzi11.github.io/post/vY312ek1B/</id>
         <link href="https://womeimingzi11.github.io/post/vY312ek1B/">
         </link>
@@ -724,7 +724,7 @@ ggRDA(res_rda, envfit_df = df_env, sp_size = 5) +
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Using R for Everything: 使用 ggplot2 可视化新型冠状病毒肺炎在中国的确诊分布]]></title>
+        <title type="html"><![CDATA[R for Everything: 使用 ggplot2 可视化新型冠状病毒肺炎在中国的确诊分布]]></title>
         <id>https://womeimingzi11.github.io/post/map_visualization_covid19_by_ggplot2/</id>
         <link href="https://womeimingzi11.github.io/post/map_visualization_covid19_by_ggplot2/">
         </link>
@@ -829,7 +829,7 @@ ggplot() + geom_polygon(aes(x = long, y = lat, group = group, fill = sqrt(Confir
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Using R for Everything: 使用 ggplot2 绘制 RasterLayer 地图]]></title>
+        <title type="html"><![CDATA[R for Everything: 使用 ggplot2 绘制 RasterLayer 地图]]></title>
         <id>https://womeimingzi11.github.io/post/using-r-for-everything-shi-yong-ggplot2-hui-zhi-rasterlayer-di-tu/</id>
         <link href="https://womeimingzi11.github.io/post/using-r-for-everything-shi-yong-ggplot2-hui-zhi-rasterlayer-di-tu/">
         </link>
