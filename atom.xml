@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://womeimingzi11.github.io</id>
     <title>洗衣机用户不会用洗衣机</title>
-    <updated>2020-09-24T21:15:52.407Z</updated>
+    <updated>2020-09-24T21:23:22.353Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://womeimingzi11.github.io"/>
     <link rel="self" href="https://womeimingzi11.github.io/atom.xml"/>
@@ -11,7 +11,7 @@
     <icon>https://womeimingzi11.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 洗衣机用户不会用洗衣机</rights>
     <entry>
-        <title type="html"><![CDATA[R for Everything 番外: 包开发 vignette/test 中 token 的处理]]></title>
+        <title type="html"><![CDATA[R for Everything 番外: R 包开发中 vignette/test token 的处理]]></title>
         <id>https://womeimingzi11.github.io/post/mEmVc9Hsx/</id>
         <link href="https://womeimingzi11.github.io/post/mEmVc9Hsx/">
         </link>
