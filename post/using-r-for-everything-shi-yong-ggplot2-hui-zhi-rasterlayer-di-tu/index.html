@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico?v=1601027676273">
+<link rel="shortcut icon" href="https://womeimingzi11.github.io/favicon.ico?v=1601951899548">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://womeimingzi11.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://womeimingzi11.github.io">
-        <img src="https://womeimingzi11.github.io/images/avatar.png?v=1601027676273" class="site-logo">
+        <img src="https://womeimingzi11.github.io/images/avatar.png?v=1601951899548" class="site-logo">
         <h1 class="site-title">洗衣机用户不会用洗衣机</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -99,7 +99,7 @@
               </div>
             
             <div class="post-content">
-              <p>Han (<a href="mailto:chenhan28@gmail.com" class="email">chenhan28@gmail.com</a>)<br>
+              <p>author: Han (<a href="mailto:chenhan28@gmail.com" class="email">chenhan28@gmail.com</a>)<br>
 在最近刚刚完成的一篇 SCI 文章中，为了描述实验的采样范围，通过 ggplot2 包 (Wickham et al. 2019) 将一组 RasterLayer 绘制成为了青藏高原的地形图。考虑到使用 R 绘制地图的中文内容较少，我们进行一次回顾。</p>
 <p><strong>PS 因为不是地理方面的文章/专业，所以在专业性方面有欠缺，但对于自然科学类文章中进行展示基本上是足够了。</strong></p>
 <h2 id="为什么用-ggplot2-画地图">为什么用 ggplot2 画地图？</h2>
@@ -124,17 +124,11 @@
 <h2 id="什么是-rasterlayer">什么是 RasterLayer？</h2>
 <p>关于 RasterLayer 的定义，在 <a href="https://rspatial.org/raster/spatial/4-rasterdata.html">Spatial Data Science (Feed the Future n.d.)</a> 中有很好的解释。</p>
 <blockquote>
-<p>A RasterLayer object represents single-layer (variable) raster data. A<br>
-RasterLayer object always stores a number of fundamental parameters<br>
-that describe it. These include the number of columns and rows, the<br>
-spatial extent, and the Coordinate Reference System. In addition, a<br>
-RasterLayer can store information about the file in which the raster<br>
-cell values are stored (if there is such a file). A RasterLayer can<br>
-also hold the raster cell values in memory.</p>
+<p>A RasterLayer object represents single-layer (variable) raster data. A RasterLayer object always stores a number of fundamental parameters that describe it. These include the number of columns and rows, the spatial extent, and the Coordinate Reference System. In addition, a RasterLayer can store information about the file in which the raster cell values are stored (if there is such a file). A RasterLayer can also hold the raster cell values in memory.</p>
 </blockquote>
 <p>在 R 中提及的 RasterLayer 通常指的是由 sp 包 (Pebesma et al. 2019) 提供的 RasterLayer 类，每一个 RasterLayer 代表一层 raster 栅格数据，其中记录了 raster 数据的基础信息，例如行、列、空间范围、参考系。而对 RasterLayer 进行操作最常用的工具是 raster 包 (Hijmans et al. 2020)。</p>
 <h2 id="数据准备">数据准备</h2>
-<p>所需加载包： 1. <code>elevatr</code>(Hollister and Shah 2018)；2. <code>raster</code>； 3.<code>tidyverse</code> (Wickham and RStudio 2019)</p>
+<p>所需加载包： 1. <code>elevatr</code>(Hollister and Shah 2018)；2. <code>raster</code>； 3. <code>tidyverse</code> (Wickham and RStudio 2019)</p>
 <p>具体到这一次的地图绘制中，我们需要<strong>两个</strong> RasterLayer —— 1. 作为背景层的 <code>bg_rst</code>，以及 2.用作展示地形的 <code>tp_rst</code>。那么如何获得这两个 RasterLayer 呢？<code>elevatr</code> 包提供了专门用于获取高程栅格数据的方法 <code>get_elev_raster</code>.</p>
 <p>不过在获取高程数据之前，需要首先指定地图绘制矩形边界。之后方可使用 <code>get_elev_raster</code> 来获取边界范围内的高程数据，使用 <code>z</code> 参数 (zoom) 确定缩放程度。因为通过 <code>get_elev_raster</code> 获取高程 raster 的方法是获取服务器与自定义边界的最小公倍数（不准确的说法），所以需要对获取的原始 RasterLayer 再次剪切，以便得到地图绘制矩形边界内的数据。</p>
 <pre><code class="language-r">library(elevatr)  # Get rasterlay from AWS by `get_elev_raster` fucntion
@@ -159,8 +153,8 @@ bg_rst
 ## dimensions : 1075, 1591, 1710325  (nrow, ncol, ncell)
 ## resolution : 0.022, 0.0186  (x, y)
 ## extent     : 70.008, 105.01, 25.0029, 44.9979  (xmin, xmax, ymin, ymax)
-## crs        : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 
-## source     : /private/var/folders/0s/pkk0623j6dgdq9yyg4d3qtq40000gn/T/RtmpUCKkKF/raster/r_tmp_2020-02-21_223346_8889_78742.grd 
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
 ## names      : layer 
 ## values     : -156.1392, 8006.811  (min, max)
 </code></pre>
@@ -170,7 +164,7 @@ bg_rst
 tp_ext &lt;- readOGR(&quot;DBATP/DBATP_Polygon.shp&quot;)
 </code></pre>
 <pre><code>## OGR data source with driver: ESRI Shapefile 
-## Source: &quot;/Users/chenhan/Documents/Develop Learn/R/plotMapByGGplot/DBATP/DBATP_Polygon.shp&quot;, layer: &quot;DBATP_Polygon&quot;
+## Source: &quot;/Users/chenhan/OneDrive/Develop Learn/R/Blog_Archive/plotMapByGGplot/DBATP/DBATP_Polygon.shp&quot;, layer: &quot;DBATP_Polygon&quot;
 ## with 1 features
 ## It has 1 fields
 </code></pre>
@@ -195,14 +189,14 @@ hbt_coord &lt;- read_rds(&quot;hbt_coord.rds&quot;) %&gt;% mutate(Ecosystem = if
     &quot;Alpine Meadow&quot;, &quot;Alpine Steppe&quot;))
 str(hbt_coord)
 </code></pre>
-<pre><code>## Classes 'tbl_df', 'tbl' and 'data.frame':    432 obs. of  4 variables:
-##  $ hbt      : chr  &quot;M&quot; &quot;M&quot; &quot;M&quot; &quot;M&quot; ...
-##  $ lon      : num  101 101 101 100 100 ...
-##  $ lat      : num  35.3 35 35 34.5 34.5 ...
-##  $ Ecosystem: chr  &quot;Alpine Meadow&quot; &quot;Alpine Meadow&quot; &quot;Alpine Meadow&quot; &quot;Alpine Meadow&quot; ...
+<pre><code>## tibble [432 × 4] (S3: tbl_df/tbl/data.frame)
+##  $ hbt      : chr [1:432] &quot;M&quot; &quot;M&quot; &quot;M&quot; &quot;M&quot; ...
+##  $ lon      : num [1:432] 101 101 101 100 100 ...
+##  $ lat      : num [1:432] 35.3 35 35 34.5 34.5 ...
+##  $ Ecosystem: chr [1:432] &quot;Alpine Meadow&quot; &quot;Alpine Meadow&quot; &quot;Alpine Meadow&quot; &quot;Alpine Meadow&quot; ...
 </code></pre>
 <p><strong>注意</strong>，前面的操作中，我们裁剪 RasterLayer 用到了 crop 和 mask 两种操作，关于这两种操作的解释，我用一张图来解释：</p>
-<figure data-type="image" tabindex="2"><img src="https://picgo-1256649726.cos.ap-chengdu.myqcloud.com/JPEG%E5%9B%BE%E5%83%8F-606FC26ACE54-1.jpeg" alt="Differences between crop andmask" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://picgo-1256649726.cos.ap-chengdu.myqcloud.com/JPEG%E5%9B%BE%E5%83%8F-606FC26ACE54-1.jpeg" alt="Differences between crop and mask" loading="lazy"></figure>
 <p>简而言之，两种操作都会得到更小的矩形图形，但是使用 mask 方法会在多边形区域外的矩形部分填充 NA 使被裁剪 RasterLayer 看起来成为多边形。</p>
 <h2 id="地图绘制">地图绘制</h2>
 <p>所需加载包： <code>scales</code> (Wickham, Seidel, and RStudio 2019)</p>
@@ -235,7 +229,8 @@ bg_rst_df &lt;- as.data.frame(bg_rst, xy = TRUE) %&gt;% mutate(alpha = rescale(l
 # of Topographic figure, it will be dizzy, and for color Topographic figure
 # please don't use the greyscale and color for the evelation simultaneously. Just
 # use alpha to control the shape of regional shpae.
-tp_rst_df &lt;- as.data.frame(tp_rst, xy = TRUE) %&gt;% na.omit()
+tp_rst_df &lt;- as.data.frame(tp_rst, xy = TRUE) %&gt;% mutate(alpha = ifelse(is.na(layer), 
+    0, 1))
 </code></pre>
 <p>当数据准备完毕，我们就开始图形的绘制。首先进行地形图叠加到背景地形的绘制。因为命令较多，并且均以注释的形式标注到代码中，故此不再提前讲解。</p>
 <pre><code class="language-r"># sacle_parm as a parameter controls the sclae of the hole figure, it will be
@@ -243,32 +238,24 @@ tp_rst_df &lt;- as.data.frame(tp_rst, xy = TRUE) %&gt;% na.omit()
 # figure.
 scale_parm &lt;- 2
 # Init ggplot
-# plot the backgroun layer, set the alpha without color will make a grey
+gmap &lt;- ggplot() + # plot the backgroun layer, set the alpha without color will make a grey
 # background
-gmap &lt;- ggplot() + 
-# plot the topographic layer, set alpha to keep the shape of Tibetan Plateau
+geom_raster(data = bg_rst_df, aes(x = x, y = y, alpha = alpha)) + # plot the topographic layer, set alpha to keep the shape of Tibetan Plateau
 # (TP). Color indicates the elevation.
-geom_raster(data = bg_rst_df, aes(x = x, y = y, alpha = alpha)) + 
- # terrain.colors is an built-in function to generate a list of color palettes.
+geom_raster(data = tp_rst_df, aes(x = x, y = y, fill = layer, alpha = alpha)) + # terrain.colors is an built-in function to generate a list of color palettes.
 # set the legend title of evelation by name parameter.
-geom_raster(data = tp_rst_df, aes(x = x, y = y, fill = layer, alpha = alpha)) +
- # As we said before, the alphas is used to determine the shpae of TP, we don't
+scale_fill_gradientn(colours = terrain.colors(100), name = &quot;Elevation (m)&quot;) + # As we said before, the alphas is used to determine the shpae of TP, we don't
 # need to show them as legends.
-scale_fill_gradientn(colours = terrain.colors(100), name = &quot;Elevation (m)&quot;) +
- # Project this figure as a map but not a normal figure
-scale_alpha(guide = &quot;none&quot;) +
- # Set preset theme makes things easire
-coord_quickmap() +
- # Set the limititions of axes. `expand` parameter will remove the gaps between
-theme_minimal() +
- # Set the titles of axis
+scale_alpha(guide = &quot;none&quot;) + # Project this figure as a map but not a normal figure
+coord_quickmap() + # Set preset theme makes things easire
+theme_minimal() + # Set the limititions of axes. `expand` parameter will remove the gaps between
+# the rectangle map and axes.  If you are not sure what's this mean, remove the
+# parameter by yourself and you will find it out.
 scale_x_continuous(limits = c(70, 105), expand = c(0, 0)) + scale_y_continuous(limits = c(25, 
-    45), expand = c(0, 0)) +
-labs(x = &quot;Longtitude (E)&quot;, y = &quot;Laitude (N)&quot;) +
- # remove the background color and background grid, you know the classical
+    45), expand = c(0, 0)) + # Set the titles of axis
+labs(x = &quot;Longtitude (E)&quot;, y = &quot;Laitude (N)&quot;) + # remove the background color and background grid, you know the classical
 # ggplot's grid, don't you?
-theme(panel.grid = element_blank(), panel.background = element_blank()) + 
-# Set the size of axis and legend
+theme(panel.grid = element_blank(), panel.background = element_blank()) + # Set the size of axis and legend
 theme(axis.title = element_text(size = 7 * scale_parm), axis.text = element_text(size = 6 * 
     scale_parm)) + theme(legend.key.width = unit(0.2 * scale_parm, &quot;cm&quot;), legend.key.height = unit(0.5 * 
     scale_parm, &quot;cm&quot;), legend.text = element_text(size = 5 * scale_parm), legend.title = element_text(size = 6 * 
@@ -328,11 +315,9 @@ theme(axis.title = element_text(size = 7 * scale_parm), axis.text = element_text
 <pre><code class="language-r">ggsave(filename = &quot;gmap.pdf&quot;, plot = gmap, width = 9 * scale_parm, height = 6.2 * 
     scale_parm, units = &quot;cm&quot;, dpi = 600)
 </code></pre>
-<pre><code>## Warning: Removed 432 rows containing missing values (geom_point).
-</code></pre>
 <figure data-type="image" tabindex="3"><img src="https://picgo-1256649726.cos.ap-chengdu.myqcloud.com/gmap.jpg" alt="" loading="lazy"></figure>
 <p>最后，如果有任何更好的意见和建议，换用通过任何形式与我交流。祝大家都能制作出令自己（主要是杂志）满意的作品。</p>
-<h2 id="参考文献">参考文献</h2>
+<h2 id="参考文献-参考文献">参考文献 [参考文献]</h2>
 <div id="refs" class="references hanging-indent" markdown="1">
 <div id="ref-bivand_rgdal_2019" markdown="1">
 <p>Bivand, Roger, Tim Keitt, Barry Rowlingson, Edzer Pebesma, Michael Sumner, Robert Hijmans, Even Rouault, Frank Warmerdam, Jeroen Ooms, and Colin Rundel. 2019. “Rgdal: Bindings for the ’Geospatial’ Data Abstraction Library.” <a href="https://CRAN.R-project.org/package=rgdal">https://CRAN.R-project.org/package=rgdal</a>.</p>
@@ -350,11 +335,10 @@ theme(axis.title = element_text(size = 7 * scale_parm), axis.text = element_text
 <p>Pebesma, Edzer, Roger Bivand, Barry Rowlingson, Virgilio Gomez-Rubio, Robert Hijmans, Michael Sumner, Don MacQueen, Jim Lemon, Josh O’Brien, and Joseph O’Rourke. 2019. “Sp: Classes and Methods for Spatial Data.” <a href="https://CRAN.R-project.org/package=sp">https://CRAN.R-project.org/package=sp</a>.</p>
 </div>
 <div id="ref-wickham_ggplot2_2019" markdown="1">
-<p>Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, and RStudio. 1.    “Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics.” <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.</p>
+<p>Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, and RStudio. 2019. “Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics.” <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.</p>
 </div>
 <div id="ref-wickham_tidyverse_2019" markdown="1">
-<p>Wickham, Hadley, and RStudio. 2019. “Tidyverse: Easily Install and Load<br>
-the ’Tidyverse’.” <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.</p>
+<p>Wickham, Hadley, and RStudio. 2019. “Tidyverse: Easily Install and Load the ’Tidyverse’.” <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.</p>
 </div>
 <div id="ref-wickham_scales_2019" markdown="1">
 <p>Wickham, Hadley, Dana Seidel, and RStudio. 2019. “Scales: Scale Functions for Visualization.” <a href="https://CRAN.R-project.org/package=scales">https://CRAN.R-project.org/package=scales</a>.</p>
@@ -363,6 +347,7 @@ the ’Tidyverse’.” <a href="https://CRAN.R-project.org/package=tidyverse">h
 <p>张镱锂, 李炳元, and 郑度. 2002. “论青藏高原范围与面积.” <em>地理学报</em> 21 (1): 1–8. <a href="https://doi.org/10.11821/yj2002010001">https://doi.org/10.11821/yj2002010001</a>.</p>
 </div>
 </div>
+
             </div>
             
               <div class="tag-container">
