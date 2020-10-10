@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://womeimingzi11.github.io</id>
     <title>洗衣机用户不会用洗衣机</title>
-    <updated>2020-10-10T04:15:56.339Z</updated>
+    <updated>2020-10-10T04:32:10.698Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://womeimingzi11.github.io"/>
     <link rel="self" href="https://womeimingzi11.github.io/atom.xml"/>
@@ -10,6 +10,24 @@
     <logo>https://womeimingzi11.github.io/images/avatar.png</logo>
     <icon>https://womeimingzi11.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 洗衣机用户不会用洗衣机</rights>
+    <entry>
+        <title type="html"><![CDATA[博客已经迁移啦~]]></title>
+        <id>https://womeimingzi11.github.io/post/uZMRc5QMk/</id>
+        <link href="https://womeimingzi11.github.io/post/uZMRc5QMk/">
+        </link>
+        <updated>2020-10-10T04:22:01.000Z</updated>
+        <summary type="html"><![CDATA[<p>新博客地址：https://blog.washman.top</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>新博客地址：https://blog.washman.top</p>
+<!-- more -->
+<p>当前的博客 https://womeimingzi11.github.io 是通过 <a href="https://gridea.dev/">Gridea</a> 编辑并托管于 Github Page。</p>
+<p>然而，因为需要展示代码，因此本站文章大多数使用 R Markdown 编写。为了能够在 Gridea 中编辑，还需要额外转换为 Markdown 并粘贴到编辑器中，虽然这个过程并不消耗太多时间，然而为了更简洁的流程，笔者依然决定切换到 <a href="https://bookdown.org/yihui/blogdown/">blogdown</a> 建站并托管于  <a href="https://app.netlify.com/">Netlify</a>。</p>
+<p>目前博客中的内容都已经转换到了新博客 https://blog.washman.top，今后的文章都会在那边第一时间更新，目前博客的维护以及更新会逐渐放缓直至停止维护。</p>
+<p>以上。</p>
+<hr>
+<p>欢迎通过<a href="mailto://chenhan28@gmail.com">邮箱</a>，<a href="https://weibo.com/womeimingzi11">微博</a>, <a href="https://twitter.com/chenhan1992">Twitter</a>以及<a href="https://www.zhihu.com/people/womeimingzi">知乎</a>与我联系。也欢迎关注<a href="https://https://blog.washman.top/">我的博客</a>。如果能对<a href="https://github.com/womeimingzi11">我的 Github</a> 感兴趣，就再欢迎不过啦！</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[amapGeocode: 使用R进行高德地图地理编码/逆编码]]></title>
         <id>https://womeimingzi11.github.io/post/dG9esk683/</id>
